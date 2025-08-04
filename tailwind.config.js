@@ -15,6 +15,7 @@ module.exports = {
       fontFamily: {
         'handwriting': ['Dancing Script', 'cursive'],
         'sans': ['Poppins', 'sans-serif'],
+        'serif': ['Playfair Display', 'serif'],
       },
       backgroundImage: {
         'gradient-apna': 'linear-gradient(135deg, rgba(255, 248, 220, 0.8) 0%, rgba(230, 240, 250, 0.8) 100%)',
