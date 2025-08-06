@@ -3,6 +3,8 @@ import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import OurWorkSection from './components/OurWorkSection';
 import OurWinningProcess from './components/OurWinningProcess';
+import ClientFeedback from './components/ClientFeedback';
+import OurServices from './components/OurServices';
 
 function App() {
   return (
@@ -18,6 +20,12 @@ function App() {
 
       {/* Our Winning Process Section Component */}
       <OurWinningProcess />
+
+      {/* Client Feedback Section Component */}
+      <ClientFeedback />
+
+      {/* Our Services Section Component */}
+      <OurServices />
     </div>
   );
 }
