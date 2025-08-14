@@ -5,6 +5,8 @@ import OurWorkSection from './components/OurWorkSection';
 import OurWinningProcess from './components/OurWinningProcess';
 import ClientFeedback from './components/ClientFeedback';
 import OurServices from './components/OurServices';
+import BookingSection from './components/BookingSection';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -26,6 +28,12 @@ function App() {
 
       {/* Our Services Section Component */}
       <OurServices />
+
+      {/* Booking Section Component */}
+      <BookingSection />
+
+      {/* Footer Component */}
+      <Footer />
     </div>
   );
 }

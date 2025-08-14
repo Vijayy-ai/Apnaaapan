@@ -68,16 +68,29 @@ const OurWorkSection = () => {
           <div className="w-full md:w-1/3 text-left text-gray-700 text-lg font-medium mb-4 md:mb-0">
             Trusted by fast-growing<br />companies around the world
           </div>
-          <div className="w-full md:w-2/3 flex flex-row items-center justify-center gap-8 md:gap-12">
-            {companyLogos.map((logo, idx) => (
-              <img
-                key={idx}
-                src={logo.src}
-                alt={logo.alt}
-                className="h-10 md:h-12 max-w-[120px] object-contain"
-                style={{ filter: logo.alt === 'Himee Ride' ? 'none' : 'none' }}
-              />
-            ))}
+          <div className="w-full md:w-2/3 overflow-hidden">
+            <div className="flex items-center animate-scroll">
+              {/* First set of logos */}
+              {companyLogos.map((logo, idx) => (
+                <img
+                  key={`first-${idx}`}
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="h-10 md:h-12 max-w-[120px] object-contain mx-4 md:mx-6 flex-shrink-0"
+                  style={{ filter: logo.alt === 'Himee Ride' ? 'none' : 'none' }}
+                />
+              ))}
+              {/* Duplicate set for seamless loop */}
+              {companyLogos.map((logo, idx) => (
+                <img
+                  key={`second-${idx}`}
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="h-10 md:h-12 max-w-[120px] object-contain mx-4 md:mx-6 flex-shrink-0"
+                  style={{ filter: logo.alt === 'Himee Ride' ? 'none' : 'none' }}
+                />
+              ))}
+            </div>
           </div>
         </div>
 

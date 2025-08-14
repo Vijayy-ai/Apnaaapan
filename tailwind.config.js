@@ -19,6 +19,15 @@ module.exports = {
       },
       backgroundImage: {
         'gradient-apna': 'linear-gradient(135deg, rgba(255, 248, 220, 0.8) 0%, rgba(230, 240, 250, 0.8) 100%)',
+      },
+      animation: {
+        'scroll': 'scroll 20s linear infinite',
+      },
+      keyframes: {
+        scroll: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       }
     },
   },

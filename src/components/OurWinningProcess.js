@@ -118,7 +118,6 @@ const OurWinningProcess = () => {
                   key={index} 
                   className={`${step.cardSize} w-full bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-1000 ease-out`}
                   style={{
-                    transform: getCardTransform(index),
                     opacity: getCardOpacity(index),
                     zIndex: getCardZIndex(index),
                     position: 'absolute',
