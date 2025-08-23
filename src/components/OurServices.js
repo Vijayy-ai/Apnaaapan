@@ -40,43 +40,50 @@ const OurServices = () => {
     const wrapper = wrapperRef.current;
     if (!sections.length || !wrapper) return;
 
-    // Calculate max width like in reference code
+    // Calculate max width
     const getMaxWidth = () =>
       sections.reduce((val, section) => val + section.offsetWidth, 0);
     
     let maxWidth = getMaxWidth();
-    let scrollSpeed = 4;
     let tl = gsap.timeline();
 
     // Set initial position
     gsap.set(sections, { x: 0 });
 
-    // Create the main animation timeline - extend to show last card fully
+    // Create the main animation timeline with smoother easing
     tl.to(sections, {
-      x: () => window.innerWidth - maxWidth - 100, // Extra 100px to ensure last card is fully visible
+      x: () => -(maxWidth - window.innerWidth + 100),
       duration: 1,
-      ease: "none"
+      ease: "power1.out"
     });
 
-    // Create ScrollTrigger with extended end point to show last card fully
+    // Create ScrollTrigger with optimized settings
     ScrollTrigger.create({
       animation: tl,
       trigger: wrapper,
       pin: true,
-      scrub: 1,
-      end: () => "+=" + (maxWidth + 100) / scrollSpeed, // Extra scroll distance for last card
-      invalidateOnRefresh: true
+      scrub: 0.5, // Reduced for smoother scrubbing
+      start: "top top",
+      end: () => "+=" + (maxWidth - window.innerWidth + 100),
+      invalidateOnRefresh: true,
+      markers: false,
+      anticipatePin: 1 // Improves performance
     });
 
-    // Handle window resize
+    // Handle window resize with debouncing
+    let resizeTimeout;
     const handleResize = () => {
-      maxWidth = getMaxWidth();
-      ScrollTrigger.refresh();
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        maxWidth = getMaxWidth();
+        ScrollTrigger.refresh();
+      }, 100);
     };
 
     window.addEventListener('resize', handleResize);
 
     return () => {
+      clearTimeout(resizeTimeout);
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
       tl.kill();
       window.removeEventListener('resize', handleResize);
@@ -84,7 +91,7 @@ const OurServices = () => {
   }, []);
 
   return (
-    <section className="bg-[#f5f5f0] py-20 px-4 md:px-8 overflow-x-hidden">
+    <section className="bg-[#EFE7D5] py-20 px-4 md:px-8 overflow-x-hidden">
       <div className="max-w-7xl mx-auto overflow-x-hidden">
         {/* Header Section */}
         <div className="flex flex-col lg:flex-row items-center justify-between mb-20">
@@ -114,13 +121,13 @@ const OurServices = () => {
       
       {/* Horizontal Cards Animation Section - Using reference pattern */}
       <div className="w-full overflow-hidden">
-        <div ref={wrapperRef} className="wrapper flex flex-nowrap" style={{ height: '100vh' }}>
+        <div ref={wrapperRef} className="wrapper flex flex-nowrap" style={{ height: '100vh', willChange: 'transform', transform: 'translateZ(0)' }}>
           {services.map((service, idx) => (
             <section
               key={service.id}
               ref={el => sectionRefs.current[idx] = el}
               className="panel section bg-white rounded-3xl p-8 shadow-xl m-4 flex-shrink-0 flex flex-col justify-between border border-gray-300 transform-gpu will-change-transform group relative overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl"
-              style={{ width: '420px', minWidth: '420px', height: '480px' }}
+              style={{ width: '420px', minWidth: '420px', height: '480px', willChange: 'transform', transform: 'translateZ(0)' }}
             >
               {/* Hover Background Gradient */}
               <div className="absolute inset-0 bg-gradient-to-b from-orange-600 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out rounded-3xl"></div>
