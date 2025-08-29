@@ -8,6 +8,8 @@ import OurServices from './components/OurServices';
 import BookingSection from './components/BookingSection';
 import Footer from './components/Footer';
 import OurStory from './pages/OurStory';
+import Work from './pages/Work';
+import Blog from './pages/Blog';
 
 function App() {
   const path = typeof window !== 'undefined' ? window.location.pathname : '/';
@@ -15,6 +17,14 @@ function App() {
   const renderPage = () => {
     if (path === '/our-story') {
       return <OurStory />;
+    }
+    
+    if (path === '/work') {
+      return <Work />;
+    }
+    
+    if (path === '/blog') {
+      return <Blog />;
     }
 
     return (

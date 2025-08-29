@@ -31,6 +31,13 @@ const Header = () => {
             Work
           </a>
           <a 
+            href="/blog" 
+            className="font-medium text-sm transition-colors duration-200"
+            style={{ color: '#5B5B5B' }}
+          >
+            Blog
+          </a>
+          <a 
             href="/contact" 
             className="font-medium text-sm transition-colors duration-200"
             style={{ color: '#5B5B5B' }}
