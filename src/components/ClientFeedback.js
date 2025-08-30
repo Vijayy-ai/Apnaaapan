@@ -41,7 +41,7 @@ const ClientFeedback = () => {
   ];
 
   return (
-    <section className="bg-[#f5f5f0] py-16">
+    <section className="bg-[#EFE7D5] py-16">
       <div className="max-w-6xl mx-auto px-8">
         {/* Section Header */}
         <div className="text-center mb-12">

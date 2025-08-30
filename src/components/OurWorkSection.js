@@ -61,11 +61,11 @@ const OurWorkSection = () => {
   ];
 
   return (
-    <section className="bg-[#f5f5f0] py-16 px-2 md:px-8">
+    <section className="bg-[#EFE7D5] py-16 px-2 md:px-8">
       <div className="max-w-6xl mx-auto">
         {/* Trusted Companies Section */}
         <div className="bg-[#faf8f3] rounded-xl px-6 py-4 flex flex-col md:flex-row items-center md:items-center justify-between mb-16 border border-[#e5e2d8]">
-          <div className="w-full md:w-1/3 text-left text-gray-700 text-lg font-medium mb-4 md:mb-0">
+          <div className="w-full md:w-1/3 text-left text-gray-700 text-lg font-nexa-regular mb-4 md:mb-0">
             Trusted by fast-growing<br />companies around the world
           </div>
           <div className="w-full md:w-2/3 overflow-hidden">

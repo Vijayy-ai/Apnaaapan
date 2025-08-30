@@ -100,10 +100,10 @@ const OurWinningProcess = () => {
 
   return (
     <>
-      <section ref={sectionRef} className="bg-[#f5f5f0] py-16 px-8 relative">
+      <section ref={sectionRef} className="bg-[#EFE7D5] py-16 px-8 relative">
         <div className="max-w-7xl mx-auto relative">
           {/* Main Title */}
-          <div className="text-center mb-12 sticky top-8 z-50 bg-[#f5f5f0] py-4">
+          <div className="text-center mb-12 sticky top-8 z-50 bg-[#EFE7D5] py-4">
             <h2 className="text-4xl md:text-5xl font-serif text-gray-800">
               Our Winning Process
             </h2>
@@ -159,7 +159,7 @@ const OurWinningProcess = () => {
       </section>
       
       {/* Spacer div to ensure separation - dramatically increased height */}
-      <div className="h-screen bg-[#f5f5f0]"></div>
+      <div className="h-screen bg-[#EFE7D5]"></div>
     </>
   );
 };

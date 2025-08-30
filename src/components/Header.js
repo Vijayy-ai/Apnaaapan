@@ -10,7 +10,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 shadow-sm">
+    <header className="bg-[#EFE7D5] border-b border-gray-200 shadow-sm">
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-8 py-4">
         {/* Logo - Clickable */}
         <div className="flex items-center cursor-pointer" onClick={handleLogoClick}>
@@ -26,7 +26,7 @@ const Header = () => {
         <div className="hidden md:flex items-center space-x-8 relative">
           <a 
             href="/our-story" 
-            className={`font-medium text-sm transition-colors duration-200 relative ${
+            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
               currentPath === '/our-story' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
             }`}
           >
@@ -38,7 +38,7 @@ const Header = () => {
           </a>
           <a 
             href="/work" 
-            className={`font-medium text-sm transition-colors duration-200 relative ${
+            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
               currentPath === '/work' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
             }`}
           >
@@ -50,7 +50,7 @@ const Header = () => {
           </a>
           <a 
             href="/blog" 
-            className={`font-medium text-sm transition-colors duration-200 relative ${
+            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
               currentPath === '/blog' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
             }`}
           >
@@ -62,7 +62,7 @@ const Header = () => {
           </a>
           <a 
             href="/contact" 
-            className={`font-medium text-sm transition-colors duration-200 relative ${
+            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
               currentPath === '/contact' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
             }`}
           >
@@ -74,7 +74,7 @@ const Header = () => {
           </a>
           <a 
             href="/with-apnaaapan" 
-            className={`font-medium text-sm transition-colors duration-200 relative ${
+            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
               currentPath === '/with-apnaaapan' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
             }`}
           >
@@ -90,13 +90,16 @@ const Header = () => {
         <div className="flex items-center">
           <a 
             href="/work-with-us" 
-            className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white px-6 py-2.5 rounded-full font-medium text-sm flex items-center space-x-2 hover:shadow-lg transition-all duration-200 hover:scale-105 transition-all duration-200"
+            className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white px-6 py-2.5 rounded-full font-nexa-bold text-sm flex items-center space-x-2 hover:shadow-lg transition-all duration-200 hover:scale-105 transition-all duration-200"
           >
             <span className="text-white text-xs">⭐</span>
             <span>Work with US</span>
           </a>
         </div>
       </nav>
+      
+      {/* Horizontal separator line */}
+      <div className="w-full h-px bg-[#D9D9D9]"></div>
     </header>
   );
 };

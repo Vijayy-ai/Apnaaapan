@@ -64,13 +64,13 @@ const OurStory = () => {
 
   return (
     <main className="bg-[#EFE7D5] min-h-screen">
-      <section className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10 py-12 md:py-16">
+      <section className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10 py-20 md:py-32">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-start">
           <div className="md:col-span-7">
             <h1 className="text-4xl md:text-5xl lg:text-6xl text-[#0D1B2A] tracking-tight font-serif">
               Our Story
             </h1>
-            <p className="mt-6 text-sm md:text-base leading-6 text-[#2C2C2C] max-w-xl">
+            <p className="mt-8 text-sm md:text-base leading-6 text-[#2C2C2C] max-w-xl">
               At Apnaaapan, we believe in advertising as a catalyst for significant business growth. Originally rooted in entertainment, our services have expanded.
             </p>
           </div>
@@ -84,7 +84,7 @@ const OurStory = () => {
           </div>
         </div>
 
-        <div className="mt-20 md:mt-24 lg:mt-28 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-32 md:mt-40 lg:mt-48 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {photos.map((src, index) => (
             <div
               key={index}
@@ -111,7 +111,7 @@ const OurStory = () => {
       <section className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10 py-16 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20">
           {/* Left Column - Title and Description */}
-          <div className="lg:col-span-5 lg:pr-8">
+          <div className="lg:col-span-5 lg:pr-8 flex flex-col justify-center">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0D1B2A] mb-8 leading-tight" style={{ fontFamily: 'MADE Avenue PERSONAL USE' }}>
               Our People
             </h2>
@@ -177,7 +177,7 @@ const OurStory = () => {
           </div>
 
           {/* Right Column - Additional Description */}
-          <div className="lg:col-span-5 lg:pl-8">
+          <div className="lg:col-span-5 lg:pl-8 flex flex-col justify-center">
             <p className="text-lg md:text-xl leading-7 text-[#2C2C2C]" style={{ fontFamily: 'NexaRegular' }}>
               We're not just a team—we're a blend of creators, thinkers, and doers who believe in the power of meaningful work. Whether it's crafting a bold visual, shaping a sharp message, or producing a story that sticks, we work together with intention. Every voice matters here, and every idea has a place. It's this mix of energy, empathy, and ambition that keeps us moving forward—and makes what we do truly stand out.
             </p>

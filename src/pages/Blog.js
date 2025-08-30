@@ -46,12 +46,12 @@ const Blog = () => {
         <div className="text-center">
           {/* Main Heading */}
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-            <span className="text-[#0D1B2A] transition-all duration-300 hover:text-[#1a365d]">Inside the</span>
-            <span className="bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent ml-4 hover:from-orange-600 hover:to-yellow-500 transition-all duration-300">Studio</span>
+            <span className="text-[#0D1B2A] transition-all duration-300 hover:text-[#1a365d]" style={{ fontFamily: 'MADE Avenue PERSONAL USE' }}>Inside the</span>
+            <span className="bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent ml-4 hover:from-orange-600 hover:to-yellow-500 transition-all duration-300" style={{ fontFamily: 'MADE Avenue PERSONAL USE' }}>Studio</span>
           </h1>
           
           {/* Subheading */}
-          <p className="text-lg md:text-xl lg:text-2xl text-[#2C2C2C] max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl lg:text-2xl text-[#2C2C2C] max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'NexaRegular' }}>
             Stories, Insights & Ideas from the World of Apnaaapan
           </p>
         </div>
@@ -70,17 +70,19 @@ const Blog = () => {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Featured Blog Post - Left Section */}
           <div className="lg:col-span-3">
-            <div className="mb-6">
-              {/* Image Box */}
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg mb-6">
-                <div className="relative overflow-hidden">
-                  <img
-                    src="/images/work/Tsczi1maYoHHENT2Fu6ychsMM 1.png"
-                    alt="White banner with Reach Talent logo in stone archway"
-                    className="w-full h-96 md:h-[28rem] object-cover"
-                  />
+                          <div className="mb-6">
+                {/* Image Box */}
+                <div className="bg-white rounded-2xl overflow-hidden shadow-lg mb-6 group cursor-pointer transition-all duration-300 hover:shadow-2xl">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src="/images/work/Tsczi1maYoHHENT2Fu6ychsMM 1.png"
+                      alt="White banner with Reach Talent logo in stone archway"
+                      className="w-full h-96 md:h-[28rem] object-cover transition-all duration-500 group-hover:scale-110"
+                    />
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
                 </div>
-              </div>
               
               {/* Text Content Outside Box */}
               <div className="text-left">
@@ -98,14 +100,18 @@ const Blog = () => {
           {/* Right Side - Two Smaller Blog Posts */}
           <div className="lg:col-span-2 space-y-0">
             {/* First Blog Post Preview */}
-            <div className="flex h-48 md:h-56 mb-4">
+            <div className="flex h-48 md:h-56 mb-4 group cursor-pointer">
               {/* Image Box Only */}
-              <div className="rounded-2xl overflow-hidden shadow-lg mr-4">
-                <img
-                  src="/images/istockphoto-104251890-612x612 1.png"
-                  alt="Modern open-plan office space with cubicles and bright lighting"
-                  className="w-40 h-40 object-cover rounded-2xl"
-                />
+              <div className="rounded-2xl overflow-hidden shadow-lg mr-4 flex-shrink-0 transition-all duration-300 hover:shadow-xl">
+                <div className="relative overflow-hidden">
+                  <img
+                    src="/images/istockphoto-104251890-612x612 1.png"
+                    alt="Modern open-plan office space with cubicles and bright lighting"
+                    className="w-40 h-40 object-cover transition-all duration-500 group-hover:scale-110"
+                  />
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
               </div>
               {/* Text Content Outside Box */}
               <div className="flex-1 flex flex-col justify-center">
@@ -120,14 +126,18 @@ const Blog = () => {
             </div>
 
             {/* Second Blog Post Preview */}
-            <div className="flex h-48 md:h-56">
+            <div className="flex h-48 md:h-56 group cursor-pointer">
               {/* Image Box Only */}
-              <div className="rounded-2xl overflow-hidden shadow-lg mr-4">
-                <img
-                  src="/images/desk-setup-idea-3 1.png"
-                  alt="Minimalist home office setup"
-                  className="w-40 h-40 object-cover rounded-2xl"
-                />
+              <div className="rounded-2xl overflow-hidden shadow-lg mr-4 flex-shrink-0 transition-all duration-300 hover:shadow-xl">
+                <div className="relative overflow-hidden">
+                  <img
+                    src="/images/desk-setup-idea-3 1.png"
+                    alt="Minimalist home office setup"
+                    className="w-40 h-40 object-cover transition-all duration-500 group-hover:scale-110"
+                  />
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
               </div>
               {/* Text Content Outside Box */}
               <div className="flex-1 flex flex-col justify-center">

@@ -30,10 +30,10 @@ const Contact = () => {
           {/* Left Section - Connect With Us */}
           <div className="space-y-12">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#0D1B2A] mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#0D1B2A] mb-6" style={{ fontFamily: 'MADE Avenue PERSONAL USE' }}>
                 Connect With <span className="text-[#FFC107]">Us</span>
               </h2>
-              <p className="text-lg text-[#5B5B5B] leading-relaxed">
+              <p className="text-lg text-[#5B5B5B] leading-relaxed" style={{ fontFamily: 'nexaRegular' }}>
                 Have service-related questions or interested in other collaborations? We're here to support you every step of the way.
               </p>
             </div>
@@ -41,7 +41,7 @@ const Contact = () => {
             <div className="space-y-12">
               {/* Learn about our services */}
               <div>
-                <h3 className="text-xl font-semibold text-[#0D1B2A] mb-6">
+                <h3 className="text-xl font-semibold text-[#0D1B2A] mb-6" style={{ fontFamily: 'nexaRegular' }}>
                   Learn about our services
                 </h3>
                 <div className="flex items-center space-x-8">
@@ -50,20 +50,20 @@ const Contact = () => {
                       <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                       <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                     </svg>
-                    <span className="text-[#5B5B5B]">hello@gmail.com</span>
+                    <span className="text-[#5B5B5B]" style={{ fontFamily: 'nexaRegular' }}>hello@gmail.com</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <svg className="w-5 h-5 text-[#F26B2A]" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                     </svg>
-                    <span className="text-[#5B5B5B]">+91 9548954859</span>
+                    <span className="text-[#5B5B5B]" style={{ fontFamily: 'nexaRegular' }}>+91 9548954859</span>
                   </div>
                 </div>
               </div>
 
               {/* Talk to our PR department */}
               <div>
-                <h3 className="text-xl font-semibold text-[#0D1B2A] mb-6">
+                <h3 className="text-xl font-semibold text-[#0D1B2A] mb-6" style={{ fontFamily: 'nexaRegular' }}>
                   Talk to our PR department
                 </h3>
                 <div className="flex items-center space-x-8">
@@ -72,20 +72,20 @@ const Contact = () => {
                       <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                       <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                     </svg>
-                    <span className="text-[#5B5B5B]">pr@gmail.com</span>
+                    <span className="text-[#5B5B5B]" style={{ fontFamily: 'nexaRegular' }}>pr@gmail.com</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <svg className="w-5 h-5 text-[#F26B2A]" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                     </svg>
-                    <span className="text-[#5B5B5B]">+91 9548954859</span>
+                    <span className="text-[#5B5B5B]" style={{ fontFamily: 'nexaRegular' }}>+91 9548954859</span>
                   </div>
                 </div>
               </div>
 
               {/* Join our team */}
               <div>
-                <h3 className="text-xl font-semibold text-[#0D1B2A] mb-6">
+                <h3 className="text-xl font-semibold text-[#0D1B2A] mb-6" style={{ fontFamily: 'nexaRegular' }}>
                   Join our team
                 </h3>
                 <div className="flex items-center space-x-8">
@@ -94,13 +94,13 @@ const Contact = () => {
                       <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                       <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                     </svg>
-                    <span className="text-[#5B5B5B]">join@gmail.com</span>
+                    <span className="text-[#5B5B5B]" style={{ fontFamily: 'nexaRegular' }}>join@gmail.com</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <svg className="w-5 h-5 text-[#F26B2A]" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                     </svg>
-                    <span className="text-[#5B5B5B]">+91 9548954859</span>
+                    <span className="text-[#5B5B5B]" style={{ fontFamily: 'nexaRegular' }}>+91 9548954859</span>
                   </div>
                 </div>
               </div>
@@ -109,15 +109,15 @@ const Contact = () => {
 
           {/* Right Section - Contact Form */}
           <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
-            <h2 className="text-2xl font-bold text-[#0D1B2A] mb-6">
-              Let us know more about you and your goals.
+            <h2 className="text-2xl font-bold text-[#0D1B2A] mb-6" style={{ fontFamily: 'MADE Avenue PERSONAL USE' }}>
+              Let us know more about you and your goals
             </h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* First Name and Last Name */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-[#5B5B5B] mb-2">
+                  <label htmlFor="firstName" className="block text-sm font-medium text-[#5B5B5B] mb-2" style={{ fontFamily: 'nexaRegular' }}>
                     First Name
                   </label>
                   <input
@@ -129,10 +129,11 @@ const Contact = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#F26B2A] focus:border-transparent transition-all duration-200"
                     placeholder="Enter your first name"
                     required
+                    style={{ fontFamily: 'nexaRegular' }}
                   />
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-[#5B5B5B] mb-2">
+                  <label htmlFor="lastName" className="block text-sm font-medium text-[#5B5B5B] mb-2" style={{ fontFamily: 'nexaRegular' }}>
                     Last Name
                   </label>
                   <input
@@ -144,13 +145,14 @@ const Contact = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#F26B2A] focus:border-transparent transition-all duration-200"
                     placeholder="Enter your last name"
                     required
+                    style={{ fontFamily: 'nexaRegular' }}
                   />
                 </div>
               </div>
 
               {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-[#5B5B5B] mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-[#5B5B5B] mb-2" style={{ fontFamily: 'nexaRegular' }}>
                   Mail
                 </label>
                 <div className="relative">
@@ -169,18 +171,19 @@ const Contact = () => {
                     className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#F26B2A] focus:border-transparent transition-all duration-200"
                     placeholder="Enter your email address"
                     required
+                    style={{ fontFamily: 'nexaRegular' }}
                   />
                 </div>
               </div>
 
               {/* Phone Number */}
               <div>
-                <label htmlFor="phoneNumber" className="block text-sm font-medium text-[#5B5B5B] mb-2">
+                <label htmlFor="phoneNumber" className="block text-sm font-medium text-[#5B5B5B] mb-2" style={{ fontFamily: 'nexaRegular' }}>
                   Phone Number
                 </label>
                 <div className="flex">
                   <div className="flex-shrink-0 px-4 py-3 bg-gray-100 border border-r-0 border-gray-300 rounded-l-xl flex items-center">
-                    <span className="text-[#5B5B5B] font-medium">+91</span>
+                    <span className="text-[#5B5B5B] font-medium" style={{ fontFamily: 'nexaRegular' }}>+91</span>
                   </div>
                   <input
                     type="tel"
@@ -191,13 +194,14 @@ const Contact = () => {
                     className="flex-1 px-4 py-3 border border-gray-300 rounded-r-xl focus:ring-2 focus:ring-[#F26B2A] focus:border-transparent transition-all duration-200"
                     placeholder="Enter your phone number"
                     required
+                    style={{ fontFamily: 'nexaRegular' }}
                   />
                 </div>
               </div>
 
               {/* Question */}
               <div>
-                <label htmlFor="question" className="block text-sm font-medium text-[#5B5B5B] mb-2">
+                <label htmlFor="question" className="block text-sm font-medium text-[#5B5B5B] mb-2" style={{ fontFamily: 'nexaRegular' }}>
                   Enter your question here
                 </label>
                 <textarea
@@ -209,6 +213,7 @@ const Contact = () => {
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#F26B2A] focus:border-transparent transition-all duration-200 resize-none"
                   placeholder="Tell us about your project or question..."
                   required
+                  style={{ fontFamily: 'nexaRegular' }}
                 />
               </div>
 
@@ -216,12 +221,13 @@ const Contact = () => {
               <button
                 type="submit"
                 className="w-full bg-gradient-to-r from-orange-500 to-yellow-400 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                style={{ fontFamily: 'nexaRegular' }}
               >
                 Submit
               </button>
 
               {/* Disclaimer */}
-              <p className="text-xs text-[#5B5B5B] text-center leading-relaxed">
+              <p className="text-xs text-[#5B5B5B] text-center leading-relaxed" style={{ fontFamily: 'nexaRegular' }}>
                 By entering my phone number in the form, I agree to receive recurring automated marketing text messages. 
                 Msg & data rates may apply, msg frequency varies. Reply HELP for help and STOP to unsubscribe. 
                 <a href="/terms" className="text-[#F26B2A] hover:underline ml-1">Terms of Use</a> and{' '}

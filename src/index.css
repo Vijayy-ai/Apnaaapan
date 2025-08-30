@@ -25,6 +25,25 @@ code {
   font-family: 'Playfair Display', serif;
 }
 
+/* Custom font classes for header */
+.font-dm-sans-medium {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 1rem; /* 16px - increased from 14px */
+}
+
+.font-nexa-bold {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  color: white;
+}
+
+/* NexaRegular font class */
+.font-nexa-regular {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
 /* Client Feedback Animation */
 @keyframes scrollLeft {
   0% {

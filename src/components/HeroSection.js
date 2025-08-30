@@ -2,7 +2,7 @@ import React from 'react';
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-[#f5f5f0] px-8 py-16">
+    <section className="relative min-h-screen flex items-center justify-center bg-[#EFE7D5] px-8 py-16">
       {/* Main Hero Card Container */}
       <div className="relative max-w-6xl mx-auto w-full">
         {/* Hero Card with rounded corners and cream background */}
