@@ -10,6 +10,8 @@ import Footer from './components/Footer';
 import OurStory from './pages/OurStory';
 import Work from './pages/Work';
 import Blog from './pages/Blog';
+import Contact from './pages/Contact';
+import WorkWithUs from './pages/WorkWithUs';
 
 function App() {
   const path = typeof window !== 'undefined' ? window.location.pathname : '/';
@@ -25,6 +27,14 @@ function App() {
     
     if (path === '/blog') {
       return <Blog />;
+    }
+    
+    if (path === '/contact') {
+      return <Contact />;
+    }
+    
+    if (path === '/work-with-us') {
+      return <WorkWithUs />;
     }
 
     return (

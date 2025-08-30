@@ -88,10 +88,13 @@ const Header = () => {
         
         {/* CTA Button - Right */}
         <div className="flex items-center">
-          <button className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white px-6 py-2.5 rounded-full font-medium text-sm flex items-center space-x-2 hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <a 
+            href="/work-with-us" 
+            className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white px-6 py-2.5 rounded-full font-medium text-sm flex items-center space-x-2 hover:shadow-lg transition-all duration-200 hover:scale-105 transition-all duration-200"
+          >
             <span className="text-white text-xs">⭐</span>
             <span>Work with US</span>
-          </button>
+          </a>
         </div>
       </nav>
     </header>
