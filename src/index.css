@@ -85,4 +85,13 @@ code {
 
 .animate-fadeIn {
   animation: fadeIn 0.5s ease-out forwards;
-} 
+}
+
+/* Cursor overlay util */
+.cursor-trail-pointer {
+  /* keep pointer native while allowing the glow to pass through */
+  pointer-events: none;
+}
+
+/* Optional: slightly hide the OS cursor to emphasize glow (comment if undesired) */
+/* body { cursor: none; } */ 

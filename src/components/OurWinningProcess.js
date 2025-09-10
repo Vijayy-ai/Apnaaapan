@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const OurWinningProcess = () => {
+const OurWinningProcess = ({ compact = false, showSpacer = true, spacerScreens = 1 }) => {
   const sectionRef = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -100,19 +100,19 @@ const OurWinningProcess = () => {
 
   return (
     <>
-      <section ref={sectionRef} className="bg-[#EFE7D5] py-16 px-8 relative">
+      <section ref={sectionRef} className={`bg-[#EFE7D5] ${compact ? 'py-8 px-6' : 'py-16 px-8'} relative`}>
         <div className="max-w-7xl mx-auto relative">
           {/* Main Title */}
-          <div className="text-center mb-12 sticky top-8 z-50 bg-[#EFE7D5] py-4">
+          <div className={`text-center ${compact ? 'mb-6' : 'mb-12'} sticky ${compact ? 'top-4' : 'top-8'} z-50 bg-[#EFE7D5] ${compact ? 'py-2' : 'py-4'}`}>
             <h2 className="text-4xl md:text-5xl font-serif text-gray-800">
               Our Winning Process
             </h2>
           </div>
 
           {/* Process Steps Container */}
-          <div className="relative h-[80vh]"> {/* Further reduced height for scroll animation */}
+          <div className={`relative ${compact ? 'h-[70vh]' : 'h-[80vh]'}`}> {/* Further reduced height for scroll animation */}
             {/* Process Steps */}
-            <div className="sticky top-32 space-y-6 flex flex-col items-center">
+            <div className={`sticky ${compact ? 'top-24' : 'top-32'} space-y-6 flex flex-col items-center`}>
               {processSteps.map((step, index) => (
                 <div 
                   key={index} 
@@ -158,8 +158,13 @@ const OurWinningProcess = () => {
         </div>
       </section>
       
-      {/* Spacer div to ensure separation - dramatically increased height */}
-      <div className="h-screen bg-[#EFE7D5]"></div>
+      {/* Spacer div to ensure separation */}
+      {showSpacer && (
+        <div
+          className="bg-[#EFE7D5]"
+          style={{ height: `${Math.max(1, spacerScreens) * 100}vh` }}
+        ></div>
+      )}
     </>
   );
 };

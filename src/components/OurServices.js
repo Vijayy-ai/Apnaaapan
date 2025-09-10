@@ -31,7 +31,7 @@ const services = [
   }
 ];
 
-const OurServices = () => {
+const OurServices = ({ showHeader = true }) => {
   const wrapperRef = useRef(null);
   const sectionRefs = useRef([]);
 
@@ -94,29 +94,31 @@ const OurServices = () => {
     <section className="bg-[#EFE7D5] py-20 px-4 md:px-8 overflow-x-hidden">
       <div className="max-w-7xl mx-auto overflow-x-hidden">
         {/* Header Section */}
-        <div className="flex flex-col lg:flex-row items-center justify-between mb-20">
-          <div className="lg:w-1/2 mb-10 lg:mb-0">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-[#1a2236] mb-4 tracking-tight">
-              Our Services
-            </h2>
-            <p className="text-base md:text-lg text-[#22223b] mb-8 leading-relaxed max-w-xl">
-              Whatever we take on, whether it's a product, website, or brand, it's never just for show. It's designed to work hard, deliver real value, and never coast on aesthetics.
-            </p>
-            <button className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white px-6 py-2 rounded-full font-semibold text-base md:text-lg hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center space-x-2">
-              <span>View All</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </button>
+        {showHeader && (
+          <div className="flex flex-col lg:flex-row items-center justify-between mb-20">
+            <div className="lg:w-1/2 mb-10 lg:mb-0">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-[#1a2236] mb-4 tracking-tight">
+                Our Services
+              </h2>
+              <p className="text-base md:text-lg text-[#22223b] mb-8 leading-relaxed max-w-xl">
+                Whatever we take on, whether it's a product, website, or brand, it's never just for show. It's designed to work hard, deliver real value, and never coast on aesthetics.
+              </p>
+              <button className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white px-6 py-2 rounded-full font-semibold text-base md:text-lg hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center space-x-2">
+                <span>View All</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+            </div>
+            <div className="lg:w-1/2 flex justify-center lg:justify-end">
+              <img 
+                src="/images/Group 100.png" 
+                alt="Company Logo" 
+                className="w-48 h-48 object-contain relative z-10"
+              />
+            </div>
           </div>
-          <div className="lg:w-1/2 flex justify-center lg:justify-end">
-            <img 
-              src="/images/Group 100.png" 
-              alt="Company Logo" 
-              className="w-48 h-48 object-contain relative z-10"
-            />
-          </div>
-        </div>
+        )}
       </div>
       
       {/* Horizontal Cards Animation Section - Using reference pattern */}
