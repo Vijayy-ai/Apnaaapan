@@ -37,6 +37,18 @@ const Header = () => {
             )}
           </a>
           <a 
+            href="/about-us" 
+            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
+              currentPath === '/about-us' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
+            }`}
+          >
+            About Us
+            {/* Active indicator line */}
+            {currentPath === '/about-us' && (
+              <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
+            )}
+          </a>
+          <a 
             href="/work" 
             className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
               currentPath === '/work' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
@@ -57,6 +69,18 @@ const Header = () => {
             Blog
             {/* Active indicator line */}
             {currentPath === '/blog' && (
+              <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
+            )}
+          </a>
+          <a 
+            href="/services" 
+            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
+              currentPath === '/services' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
+            }`}
+          >
+            Services
+            {/* Active indicator line */}
+            {currentPath === '/services' && (
               <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
             )}
           </a>

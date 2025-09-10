@@ -8,15 +8,20 @@ import OurServices from './components/OurServices';
 import BookingSection from './components/BookingSection';
 import Footer from './components/Footer';
 import OurStory from './pages/OurStory';
+import AboutUs from './pages/AboutUs';
 import Work from './pages/Work';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import WorkWithUs from './pages/WorkWithUs';
+import Services from './pages/Services';
 
 function App() {
   const path = typeof window !== 'undefined' ? window.location.pathname : '/';
 
   const renderPage = () => {
+    if (path === '/about-us') {
+      return <AboutUs />;
+    }
     if (path === '/our-story') {
       return <OurStory />;
     }
@@ -35,6 +40,10 @@ function App() {
     
     if (path === '/work-with-us') {
       return <WorkWithUs />;
+    }
+    
+    if (path === '/services') {
+      return <Services />;
     }
 
     return (
