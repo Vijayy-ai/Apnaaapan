@@ -37,6 +37,18 @@ const Header = () => {
             )}
           </a>
           <a 
+            href="/partner-with-us" 
+            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
+              currentPath === '/partner-with-us' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
+            }`}
+          >
+            Partner With Us
+            {/* Active indicator line */}
+            {currentPath === '/partner-with-us' && (
+              <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
+            )}
+          </a>
+          <a 
             href="/about-us" 
             className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
               currentPath === '/about-us' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'

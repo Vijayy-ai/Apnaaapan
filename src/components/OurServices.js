@@ -31,7 +31,7 @@ const services = [
   }
 ];
 
-const OurServices = ({ showHeader = true }) => {
+const OurServices = ({ showHeader = true, items }) => {
   const wrapperRef = useRef(null);
   const sectionRefs = useRef([]);
 
@@ -90,6 +90,8 @@ const OurServices = ({ showHeader = true }) => {
     };
   }, []);
 
+  const itemsToRender = items && items.length ? items : services;
+
   return (
     <section className="bg-[#EFE7D5] py-20 px-4 md:px-8 overflow-x-hidden">
       <div className="max-w-7xl mx-auto overflow-x-hidden">
@@ -124,7 +126,7 @@ const OurServices = ({ showHeader = true }) => {
       {/* Horizontal Cards Animation Section - Using reference pattern */}
       <div className="w-full overflow-hidden">
         <div ref={wrapperRef} className="wrapper flex flex-nowrap" style={{ height: '100vh', willChange: 'transform', transform: 'translateZ(0)' }}>
-          {services.map((service, idx) => (
+          {itemsToRender.map((service, idx) => (
             <section
               key={service.id}
               ref={el => sectionRefs.current[idx] = el}

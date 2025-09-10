@@ -14,6 +14,7 @@ import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import WorkWithUs from './pages/WorkWithUs';
 import Services from './pages/Services';
+import PartnerWithUs from './pages/PartnerWithUs';
 
 function App() {
   const path = typeof window !== 'undefined' ? window.location.pathname : '/';
@@ -44,6 +45,10 @@ function App() {
     
     if (path === '/services') {
       return <Services />;
+    }
+
+    if (path === '/partner-with-us') {
+      return <PartnerWithUs />;
     }
 
     return (
