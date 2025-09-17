@@ -22,80 +22,50 @@ const Header = () => {
           />
         </div>
         
-        {/* Navigation Links - Center */}
+        {/* Navigation Links - Center (with dropdown groupings) */}
         <div className="hidden md:flex items-center space-x-8 relative">
-          <a 
-            href="/our-story" 
-            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
-              currentPath === '/our-story' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
-            }`}
-          >
-            Our Story
-            {/* Active indicator line */}
-            {currentPath === '/our-story' && (
-              <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
-            )}
-          </a>
-          <a 
-            href="/partner-with-us" 
-            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
-              currentPath === '/partner-with-us' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
-            }`}
-          >
-            Partner With Us
-            {/* Active indicator line */}
-            {currentPath === '/partner-with-us' && (
-              <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
-            )}
-          </a>
-          <a 
-            href="/about-us" 
-            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
-              currentPath === '/about-us' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
-            }`}
-          >
-            About Us
-            {/* Active indicator line */}
-            {currentPath === '/about-us' && (
-              <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
-            )}
-          </a>
-          <a 
-            href="/work" 
-            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
-              currentPath === '/work' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
-            }`}
-          >
-            Work
-            {/* Active indicator line */}
-            {currentPath === '/work' && (
-              <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
-            )}
-          </a>
-          <a 
-            href="/blog" 
-            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
-              currentPath === '/blog' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
-            }`}
-          >
-            Blog
-            {/* Active indicator line */}
-            {currentPath === '/blog' && (
-              <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
-            )}
-          </a>
-          <a 
-            href="/services" 
-            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
-              currentPath === '/services' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
-            }`}
-          >
-            Services
-            {/* Active indicator line */}
-            {currentPath === '/services' && (
-              <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
-            )}
-          </a>
+          {/* Our Story group */}
+          <div className="relative group">
+            <a 
+              href="/our-story" 
+              className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
+                currentPath === '/our-story' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
+              }`}
+            >
+              Our Story
+              {currentPath === '/our-story' && (
+                <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
+              )}
+            </a>
+            <div className="absolute left-0 mt-3 hidden group-hover:block">
+              <div className="rounded-xl bg-white shadow-lg ring-1 ring-black/5 py-2 min-w-[180px]">
+                <a href="/partner-with-us" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">Partner With Us</a>
+                <a href="/about-us" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">About Us</a>
+              </div>
+            </div>
+          </div>
+
+          {/* Work group */}
+          <div className="relative group">
+            <a 
+              href="/work" 
+              className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
+                currentPath === '/work' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
+              }`}
+            >
+              Work
+              {currentPath === '/work' && (
+                <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
+              )}
+            </a>
+            <div className="absolute left-0 mt-3 hidden group-hover:block">
+              <div className="rounded-xl bg-white shadow-lg ring-1 ring-black/5 py-2 min-w-[160px]">
+                <a href="/blog" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">Blog</a>
+                <a href="/services" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">Services</a>
+              </div>
+            </div>
+          </div>
+
           <a 
             href="/contact" 
             className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${

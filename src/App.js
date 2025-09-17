@@ -15,6 +15,7 @@ import Contact from './pages/Contact';
 import WorkWithUs from './pages/WorkWithUs';
 import Services from './pages/Services';
 import PartnerWithUs from './pages/PartnerWithUs';
+import WithApnaaapan from './pages/WithApnaaapan';
 
 function App() {
   const path = typeof window !== 'undefined' ? window.location.pathname : '/';
@@ -49,6 +50,10 @@ function App() {
 
     if (path === '/partner-with-us') {
       return <PartnerWithUs />;
+    }
+
+    if (path === '/with-apnaaapan') {
+      return <WithApnaaapan />;
     }
 
     return (
