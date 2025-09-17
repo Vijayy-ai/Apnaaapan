@@ -1,8 +1,57 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Header = () => {
   // Get current path to determine active page
   const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
+  const [openMenu, setOpenMenu] = useState(null); // 'ourStory' | 'work' | null
+  const closeTimeoutRef = useRef(null);
+
+  const [showHeader, setShowHeader] = useState(true);
+  const lastScrollYRef = useRef(0);
+  const tickingRef = useRef(false);
+
+  const clearCloseTimeout = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  };
+
+  const handleGroupEnter = (menuKey) => {
+    clearCloseTimeout();
+    setOpenMenu(menuKey);
+  };
+
+  const handleGroupLeave = () => {
+    clearCloseTimeout();
+    closeTimeoutRef.current = setTimeout(() => setOpenMenu(null), 150);
+  };
+
+  useEffect(() => {
+    const onScroll = () => {
+      const currentY = window.scrollY || 0;
+      if (!tickingRef.current) {
+        window.requestAnimationFrame(() => {
+          const lastY = lastScrollYRef.current;
+          const isScrollingDown = currentY > lastY;
+          const distance = Math.abs(currentY - lastY);
+
+          if (currentY < 10) {
+            setShowHeader(true);
+          } else if (distance > 4) {
+            setShowHeader(!isScrollingDown);
+          }
+
+          lastScrollYRef.current = currentY;
+          tickingRef.current = false;
+        });
+        tickingRef.current = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Function to handle logo click - redirect to home page
   const handleLogoClick = () => {
@@ -10,7 +59,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[#EFE7D5] border-b border-gray-200 shadow-sm">
+    <header className={`bg-[#EFE7D5] border-b border-gray-200 shadow-sm fixed top-0 left-0 right-0 z-50 transition-transform duration-200 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}>
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-8 py-4">
         {/* Logo - Clickable */}
         <div className="flex items-center cursor-pointer" onClick={handleLogoClick}>
@@ -25,45 +74,79 @@ const Header = () => {
         {/* Navigation Links - Center (with dropdown groupings) */}
         <div className="hidden md:flex items-center space-x-8 relative">
           {/* Our Story group */}
-          <div className="relative group">
+          <div 
+            className="relative"
+            onMouseEnter={() => handleGroupEnter('ourStory')}
+            onMouseLeave={handleGroupLeave}
+          >
             <a 
               href="/our-story" 
               className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
                 currentPath === '/our-story' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
               }`}
             >
-              Our Story
+              <span className="inline-flex items-center gap-1">
+                <span>Our Story</span>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="0 0 20 20" 
+                  fill="currentColor" 
+                  className={`w-4 h-4 transition-transform duration-200 ${openMenu === 'ourStory' ? 'rotate-180' : 'rotate-0'}`}
+                  aria-hidden="true"
+                >
+                  <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" />
+                </svg>
+              </span>
               {currentPath === '/our-story' && (
                 <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
               )}
             </a>
-            <div className="absolute left-0 mt-3 hidden group-hover:block">
-              <div className="rounded-xl bg-white shadow-lg ring-1 ring-black/5 py-2 min-w-[180px]">
-                <a href="/partner-with-us" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">Partner With Us</a>
-                <a href="/about-us" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">About Us</a>
+            {openMenu === 'ourStory' && (
+              <div className="absolute left-0 top-full mt-2">
+                <div className="rounded-xl bg-white shadow-lg ring-1 ring-black/5 py-2 min-w-[180px]">
+                  <a href="/partner-with-us" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">Partner With Us</a>
+                  <a href="/about-us" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">About Us</a>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Work group */}
-          <div className="relative group">
+          <div 
+            className="relative"
+            onMouseEnter={() => handleGroupEnter('work')}
+            onMouseLeave={handleGroupLeave}
+          >
             <a 
               href="/work" 
               className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
                 currentPath === '/work' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
               }`}
             >
-              Work
+              <span className="inline-flex items-center gap-1">
+                <span>Work</span>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="0 0 20 20" 
+                  fill="currentColor" 
+                  className={`w-4 h-4 transition-transform duration-200 ${openMenu === 'work' ? 'rotate-180' : 'rotate-0'}`}
+                  aria-hidden="true"
+                >
+                  <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" />
+                </svg>
+              </span>
               {currentPath === '/work' && (
                 <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
               )}
             </a>
-            <div className="absolute left-0 mt-3 hidden group-hover:block">
-              <div className="rounded-xl bg-white shadow-lg ring-1 ring-black/5 py-2 min-w-[160px]">
-                <a href="/blog" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">Blog</a>
-                <a href="/services" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">Services</a>
+            {openMenu === 'work' && (
+              <div className="absolute left-0 top-full mt-2">
+                <div className="rounded-xl bg-white shadow-lg ring-1 ring-black/5 py-2 min-w-[160px]">
+                  <a href="/blog" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">Blog</a>
+                  <a href="/services" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">Services</a>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           <a 

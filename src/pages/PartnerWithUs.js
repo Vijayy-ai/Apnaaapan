@@ -1,5 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
 import OurServices from '../components/OurServices';
+import StickySteps from '../components/StickySteps';
+
+const HowItWorksWithStickyHeading = () => {
+  const [isHeadingSticky, setIsHeadingSticky] = useState(true);
+  const [releaseHeading, setReleaseHeading] = useState(false);
+
+  const handleActiveChange = (index, total) => {
+    // Keep sticky even when last step becomes active; release handled by progress
+    setReleaseHeading(false);
+    setIsHeadingSticky(true);
+  };
+
+  const handleProgress = (progress, index, total) => {
+    // When last step is active and we're in the final ~7% of scroll, release heading
+    if (index >= total - 1 && progress > 0.93) {
+      if (!releaseHeading) setReleaseHeading(true);
+    } else if (releaseHeading) {
+      setReleaseHeading(false);
+    }
+  };
+
+  return (
+    <>
+      <div className={`text-center ${isHeadingSticky && !releaseHeading ? 'sticky top-14 md:top-18 lg:top-20 z-40 bg-[#EFE7D5] bg-opacity-90' : ''}`}>
+        <div className="text-[#E2552A] text-sm md:text-base font-semibold tracking-wide mb-2">Our Process</div>
+        <h3 className="font-serif text-[#0D1B2A] font-bold text-[32px] md:text-[44px] lg:text-[52px] leading-tight">How It Works</h3>
+      </div>
+
+      <StickySteps
+        onActiveChange={handleActiveChange}
+        onProgress={handleProgress}
+        steps={[
+          {
+            title: 'Connect',
+            description:
+              'Launch & Execution involves implementing your digital marketing strategy with precision. We coordinate all elements to ensure a seamless rollout, optimizing campaigns for maximum impact and engagement.',
+            image: '/images/partner_us/connect.png',
+          },
+          {
+            title: 'Collaborate',
+            description:
+              'Launch & Execution involves implementing your digital marketing strategy with precision. We coordinate all elements to ensure a seamless rollout, optimizing campaigns for maximum impact and engagement.',
+            image: '/images/partner_us/collaborate.png',
+          },
+          {
+            title: 'Deliver',
+            description:
+              'Launch & Execution involves implementing your digital marketing strategy with precision. We coordinate all elements to ensure a seamless rollout, optimizing campaigns for maximum impact and engagement.',
+            image: '/images/partner_us/deliver.png',
+          },
+          {
+            title: 'Grow Together',
+            description:
+              'Launch & Execution involves implementing your digital marketing strategy with precision. We coordinate all elements to ensure a seamless rollout, optimizing campaigns for maximum impact and engagement.',
+            image: '/images/partner_us/grow together.png',
+          },
+        ]}
+      />
+    </>
+  );
+};
 
 const PartnerWithUs = () => {
   return (
@@ -98,74 +159,8 @@ const PartnerWithUs = () => {
 
       {/* Our Process - How It Works */}
       <section className="max-w-[1200px] mx-auto px-4 md:px-8 pt-4 md:pt-6 lg:pt-8 pb-16">
-        <div className="text-center mb-8 md:mb-10">
-          <div className="text-[#E2552A] text-sm md:text-base font-semibold tracking-wide mb-2">Our Process</div>
-          <h3 className="font-serif text-[#0D1B2A] font-bold text-[32px] md:text-[44px] lg:text-[52px] leading-tight">How It Works</h3>
-        </div>
-
-        {/* Step 1 */}
-        <div className="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-[#E6E1D6] flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-10">
-          <div className="md:w-1/2">
-            <div className="inline-flex items-center text-xs md:text-sm text-[#6B7280] bg-[#F2F2F2] rounded-full px-3 py-1 mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#5B8EF1] mr-2"></span> Step 1
-            </div>
-            <h4 className="font-serif text-[#0D1B2A] text-3xl md:text-4xl font-bold mb-4">Connect</h4>
-            <p className="text-[#22223b] leading-7 md:leading-8">
-              Launch & Execution involves implementing your digital marketing strategy with precision. We coordinate all elements to ensure a seamless rollout, optimizing campaigns for maximum impact and engagement.
-            </p>
-          </div>
-          <div className="md:w-1/2">
-            <img src="/images/partner_us/connect.png" alt="Connect step" className="w-full h-auto" />
-          </div>
-        </div>
-
-        {/* Step 2 */}
-        <div className="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-[#E6E1D6] flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-10">
-          <div className="md:w-1/2 order-2 md:order-1">
-            <div className="inline-flex items-center text-xs md:text-sm text-[#6B7280] bg-[#F2F2F2] rounded-full px-3 py-1 mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#5B8EF1] mr-2"></span> Step 2
-            </div>
-            <h4 className="font-serif text-[#0D1B2A] text-3xl md:text-4xl font-bold mb-4">Collaborate</h4>
-            <p className="text-[#22223b] leading-7 md:leading-8">
-              Launch & Execution involves implementing your digital marketing strategy with precision. We coordinate all elements to ensure a seamless rollout, optimizing campaigns for maximum impact and engagement.
-            </p>
-          </div>
-          <div className="md:w-1/2 order-1 md:order-2">
-            <img src="/images/partner_us/collaborate.png" alt="Collaborate step" className="w-full h-auto" />
-          </div>
-        </div>
-
-        {/* Step 3 */}
-        <div className="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-[#E6E1D6] flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-10">
-          <div className="md:w-1/2">
-            <div className="inline-flex items-center text-xs md:text-sm text-[#6B7280] bg-[#F2F2F2] rounded-full px-3 py-1 mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#5B8EF1] mr-2"></span> Step 3
-            </div>
-            <h4 className="font-serif text-[#0D1B2A] text-3xl md:text-4xl font-bold mb-4">Deliver</h4>
-            <p className="text-[#22223b] leading-7 md:leading-8">
-              Launch & Execution involves implementing your digital marketing strategy with precision. We coordinate all elements to ensure a seamless rollout, optimizing campaigns for maximum impact and engagement.
-            </p>
-          </div>
-          <div className="md:w-1/2">
-            <img src="/images/partner_us/deliver.png" alt="Deliver step" className="w-full h-auto" />
-          </div>
-        </div>
-
-        {/* Step 4 */}
-        <div className="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-[#E6E1D6] flex flex-col md:flex-row items-center gap-8 md:gap-12">
-          <div className="md:w-1/2 order-2 md:order-1">
-            <div className="inline-flex items-center text-xs md:text-sm text-[#6B7280] bg-[#F2F2F2] rounded-full px-3 py-1 mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#5B8EF1] mr-2"></span> Step 4
-            </div>
-            <h4 className="font-serif text-[#0D1B2A] text-3xl md:text-4xl font-bold mb-4">Grow Together</h4>
-            <p className="text-[#22223b] leading-7 md:leading-8">
-              Launch & Execution involves implementing your digital marketing strategy with precision. We coordinate all elements to ensure a seamless rollout, optimizing campaigns for maximum impact and engagement.
-            </p>
-          </div>
-          <div className="md:w-1/2 order-1 md:order-2">
-            <img src="/images/partner_us/grow together.png" alt="Grow Together step" className="w-full h-auto" />
-          </div>
-        </div>
+        {/* Sticky heading until last step, then it scrolls away */}
+        <HowItWorksWithStickyHeading />
       </section>
 
       {/* Services We White Label - Heading Section */}
