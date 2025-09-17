@@ -1,8 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import React, { useRef } from 'react';
 
 const photos = [
   '/images/image 12.png',
@@ -11,56 +7,29 @@ const photos = [
 ];
 
 const OurStory = () => {
-  const wrapperRef = useRef(null);
-  const sectionRefs = useRef([]);
+  const scrollContainerRef = useRef(null);
 
-  useEffect(() => {
-    const sections = sectionRefs.current;
-    const wrapper = wrapperRef.current;
-    if (!sections.length || !wrapper) return;
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const scrollAmount = 420; // Card width (400px) + gap (20px)
+      container.scrollBy({
+        left: -scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
-    // Calculate max width like in reference code
-    const getMaxWidth = () =>
-      sections.reduce((val, section) => val + section.offsetWidth, 0);
-    
-    let maxWidth = getMaxWidth();
-    let scrollSpeed = 4;
-    let tl = gsap.timeline();
-
-    // Set initial position
-    gsap.set(sections, { x: 0 });
-
-    // Create the main animation timeline - extend to show last card fully
-    tl.to(sections, {
-      x: () => window.innerWidth - maxWidth - 100, // Extra 100px to ensure last card is fully visible
-      duration: 1,
-      ease: "none"
-    });
-
-    // Create ScrollTrigger with extended end point to show last card fully
-    ScrollTrigger.create({
-      animation: tl,
-      trigger: wrapper,
-      pin: true,
-      scrub: 1,
-      end: () => "+=" + (maxWidth + 100) / scrollSpeed, // Extra scroll distance for last card
-      invalidateOnRefresh: true
-    });
-
-    // Handle window resize
-    const handleResize = () => {
-      maxWidth = getMaxWidth();
-      ScrollTrigger.refresh();
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      tl.kill();
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const scrollAmount = 420; // Card width (400px) + gap (20px)
+      container.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <main className="bg-[#EFE7D5] min-h-screen">
@@ -71,7 +40,7 @@ const OurStory = () => {
               Our Story
             </h1>
             <p className="mt-8 text-sm md:text-base leading-6 text-[#2C2C2C] max-w-xl">
-              At Apnaaapan, we believe in advertising as a catalyst for significant business growth. Originally rooted in entertainment, our services have expanded.
+              At Apnaaapan, we believe in advertising as a catalyst for significant business growth. Originally rooted in entertainment, our services have expanded to encompass comprehensive digital marketing solutions that drive real results for our clients.
             </p>
           </div>
 
@@ -137,11 +106,11 @@ const OurStory = () => {
                 {/* Badges positioned at bottom-left of image */}
                 <div className="absolute -bottom-3 left-6 flex flex-row gap-3">
                   <span className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#DF5316] to-[#F4BF11] text-white text-sm font-medium rounded-full shadow-md" style={{ fontFamily: 'NexaBold' }}>
-                    <span className="mr-2">⭐</span>
+                    <span className="mr-2 text-white">⭐</span>
                     Founder
                   </span>
                   <span className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#DF5316] to-[#F4BF11] text-white text-sm font-medium rounded-full shadow-md" style={{ fontFamily: 'NexaBold' }}>
-                    <span className="mr-2">⭐</span>
+                    <span className="mr-2 text-white">⭐</span>
                     Gourav Sharma
                   </span>
                 </div>
@@ -164,11 +133,11 @@ const OurStory = () => {
                 {/* Badges positioned at bottom-left of image */}
                 <div className="absolute -bottom-3 left-6 flex flex-row gap-3">
                   <span className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#DF5316] to-[#F4BF11] text-white text-sm font-medium rounded-full shadow-md" style={{ fontFamily: 'NexaBold' }}>
-                    <span className="mr-2">⭐</span>
+                    <span className="mr-2 text-white">⭐</span>
                     Co-Founder
                   </span>
                   <span className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#DF5316] to-[#F4BF11] text-white text-sm font-medium rounded-full shadow-md" style={{ fontFamily: 'NexaBold' }}>
-                    <span className="mr-2">⭐</span>
+                    <span className="mr-2 text-white">⭐</span>
                     Karthik Patel
                   </span>
                 </div>
@@ -354,9 +323,35 @@ const OurStory = () => {
           </div>
         </div>
         
-        {/* Horizontal Cards Animation Section */}
-        <div className="w-full overflow-hidden">
-          <div ref={wrapperRef} className="wrapper flex flex-nowrap" style={{ height: '100vh' }}>
+        {/* Milestones Cards with Pagination */}
+        <div className="relative">
+          {/* Navigation Arrows */}
+          <button 
+            onClick={scrollLeft}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-200 active:scale-95"
+            aria-label="Scroll left"
+          >
+            <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          <button 
+            onClick={scrollRight}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-200 active:scale-95"
+            aria-label="Scroll right"
+          >
+            <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+          
+          {/* Cards Container with Horizontal Scrolling */}
+          <div 
+            ref={scrollContainerRef}
+            className="flex space-x-5 overflow-x-auto pb-4 px-4" 
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
             {[
               {
                 id: "2023",
@@ -374,49 +369,44 @@ const OurStory = () => {
                 description: "Partnered with leading national clients & launched 360° campaigns."
               },
               {
-                id: "04",
-                title: "Web Development.",
-                description: "Whatever we take on, whether it's a product, website, or brand, it's never just for show. It's designed to work hard, deliver real value, and never coast on aesthetics."
+                id: "2026",
+                title: "Global Expansion",
+                description: "Expanded our services internationally and established partnerships worldwide."
               },
               {
-                id: "05",
-                title: "Marketing Strategy.",
-                description: "Whatever we take on, whether it's a product, website, or brand, it's never just for show. It's designed to work hard, deliver real value, and never coast on aesthetics."
+                id: "2027",
+                title: "Innovation Hub",
+                description: "Launched our innovation lab to develop cutting-edge marketing technologies."
               }
-            ].map((milestone, idx) => (
-              <section
-                key={milestone.id}
-                ref={el => sectionRefs.current[idx] = el}
-                className="panel section bg-white rounded-3xl p-8 shadow-xl m-4 flex-shrink-0 flex flex-col justify-between border border-gray-300 transform-gpu will-change-transform group relative overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl"
-                style={{ width: '420px', minWidth: '420px', height: '480px' }}
-              >
-                {/* Hover Background Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-b from-orange-600 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out rounded-3xl"></div>
-                
-                {/* Arrow Icon */}
-                <div className="absolute top-6 right-6 z-10">
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-                    <svg className="w-6 h-6 text-[#0D1B2A] transform rotate-45 transition-all duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            ].map((milestone, index) => (
+              <div key={milestone.id} className="flex-shrink-0 w-[400px]">
+                <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-300 group relative overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl" style={{ height: '520px' }}>
+                  {/* Hover Background Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-orange-600 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out rounded-3xl"></div>
+                  
+                  {/* Arrow Icon */}
+                  <div className="absolute top-6 right-6 z-10">
+                    <svg className="w-6 h-6 text-[#1a2236] transform rotate-45 transition-all duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </div>
-                </div>
-                
-                {/* Content Container */}
-                <div className="relative z-10 flex flex-col justify-between h-full">
-                  <div className="mt-8 group-hover:mt-12 transition-all duration-500 ease-out">
-                    <span className="text-orange-500 font-bold text-lg mb-4 block tracking-wider group-hover:text-white transition-colors duration-300">
-                      ({milestone.id})
-                    </span>
-                    <h3 className="text-2xl md:text-3xl font-serif font-bold text-[#0D1B2A] mb-4 group-hover:text-white transition-colors duration-300">
-                      {milestone.title}
-                    </h3>
-                    <p className="text-[#2C2C2C] leading-relaxed text-base md:text-lg group-hover:text-white transition-colors duration-300">
-                      {milestone.description}
-                    </p>
+                  
+                  {/* Content Container */}
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="flex-1">
+                      <span className="text-orange-500 font-bold text-lg mb-6 block tracking-wider group-hover:text-white transition-colors duration-300">
+                        ({milestone.id})
+                      </span>
+                      <h3 className="text-2xl md:text-3xl font-serif font-bold text-[#1a2236] mb-6 group-hover:text-white transition-colors duration-300 leading-tight">
+                        {milestone.title}
+                      </h3>
+                      <p className="text-[#22223b] leading-relaxed text-base group-hover:text-white transition-colors duration-300">
+                        {milestone.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </section>
+              </div>
             ))}
           </div>
         </div>

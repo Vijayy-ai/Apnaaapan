@@ -560,7 +560,7 @@ const Services = () => {
         </div>
 
         {/* What sets us apart Section */}
-        <div className="mb-24">
+        <div className="mb-8">
           <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
             <div className="flex flex-col lg:flex-row">
               {/* Left side - Color bars */}

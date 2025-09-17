@@ -162,7 +162,7 @@ const OurWinningProcess = ({ compact = false, showSpacer = true, spacerScreens =
       {showSpacer && (
         <div
           className="bg-[#EFE7D5]"
-          style={{ height: `${Math.max(1, spacerScreens) * 100}vh` }}
+          style={{ height: `${Math.max(1, spacerScreens) * 75}vh` }}
         ></div>
       )}
     </>

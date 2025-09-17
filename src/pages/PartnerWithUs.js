@@ -25,7 +25,15 @@ const PartnerWithUs = () => {
 
         {/* CTA and intro text */}
         <div className="mt-10 md:mt-12 max-w-xl">
-          <button className="inline-flex items-center gap-2 rounded-full text-white text-base md:text-lg font-semibold px-8 py-3.5 bg-gradient-to-r from-[#F26B2A] to-[#FFC107] shadow hover:shadow-md transition-transform hover:scale-[1.02]">
+          <button 
+            onClick={() => {
+              const readyToPartnerSection = document.getElementById('ready-to-partner');
+              if (readyToPartnerSection) {
+                readyToPartnerSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            className="inline-flex items-center gap-2 rounded-full text-white text-base md:text-lg font-semibold px-8 py-3.5 bg-gradient-to-r from-[#F26B2A] to-[#FFC107] shadow hover:shadow-md transition-transform hover:scale-[1.02]"
+          >
             Start Partnering
             <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -211,7 +219,7 @@ const PartnerWithUs = () => {
       </section>
 
       {/* Final CTA + Contact Form */}
-      <section className="max-w-[1250px] mx-auto px-4 md:px-8 pt-6 md:pt-10 pb-16">
+      <section id="ready-to-partner" className="max-w-[1250px] mx-auto px-4 md:px-8 pt-6 md:pt-10 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left: Heading + Illustration */}
           <div className="lg:col-span-6">

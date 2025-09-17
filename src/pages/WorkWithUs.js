@@ -12,7 +12,16 @@ const WorkWithUs = () => {
           <p className="text-xl md:text-2xl text-[#5B5B5B] max-w-4xl mx-auto leading-relaxed mb-20" style={{ fontFamily: 'NexaRegular' }}>
             Lorem ipsum dolor sit amet consectetur. Ultricies quis velit eu malesuada molestie arcu. Cursus interdum felis id lectus. A nullam erat aliquet mauris justo odio lorem. Nisl cum at non cras mi nibh accumsan dictum.
           </p>
-          <button className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white px-10 py-5 rounded-full font-semibold text-xl flex items-center space-x-3 mx-auto hover:shadow-lg transition-all duration-200 hover:scale-105" style={{ fontFamily: 'NexaBold Regular' }}>
+          <button 
+            onClick={() => {
+              const openPositionsSection = document.getElementById('open-positions');
+              if (openPositionsSection) {
+                openPositionsSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white px-10 py-5 rounded-full font-semibold text-xl flex items-center space-x-3 mx-auto hover:shadow-lg transition-all duration-200 hover:scale-105" 
+            style={{ fontFamily: 'NexaBold Regular' }}
+          >
             <span>view open positions</span>
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -171,8 +180,8 @@ const WorkWithUs = () => {
         </div>
 
         {/* Open Positions Section */}
-        <div className="mb-32 w-full">
-          <div className="mb-16">
+        <div id="open-positions" className="mb-8 w-full">
+          <div className="mb-8">
             <h2 className="text-4xl md:text-5xl font-bold text-[#0D1B2A] mb-8 leading-tight">
               Open Positions
             </h2>

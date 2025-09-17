@@ -64,11 +64,11 @@ code {
 }
 
 .animate-scroll-left {
-  animation: scrollLeft 30s linear infinite;
+  animation: scrollLeft 15s linear infinite;
 }
 
 .animate-scroll-right {
-  animation: scrollRight 30s linear infinite;
+  animation: scrollRight 15s linear infinite;
 }
 
 /* Project Card Fade-in Animation */
@@ -94,4 +94,9 @@ code {
 }
 
 /* Optional: slightly hide the OS cursor to emphasize glow (comment if undesired) */
-/* body { cursor: none; } */ 
+/* body { cursor: none; } */
+
+/* Hide scrollbar for horizontal scrolling */
+.overflow-x-auto::-webkit-scrollbar {
+  display: none;
+} 

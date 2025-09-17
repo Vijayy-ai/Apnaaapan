@@ -77,8 +77,10 @@ function App() {
   return (
     <div className="min-h-screen bg-[#EFE7D5]">
       <Header />
-      {renderPage()}
-      <Footer />
+      <div className="pt-20">
+        {renderPage()}
+        <Footer />
+      </div>
     </div>
   );
 }
