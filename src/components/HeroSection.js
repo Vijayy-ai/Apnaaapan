@@ -2,11 +2,11 @@ import React from 'react';
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-[#EFE7D5] px-8 py-16">
+    <section className="relative min-h-[70vh] md:min-h-screen flex items-center justify-center bg-[#EFE7D5] px-4 md:px-8 py-12 md:py-16">
       {/* Main Hero Card Container */}
       <div className="relative max-w-6xl mx-auto w-full">
         {/* Hero Card with rounded corners and cream background */}
-        <div className="relative bg-[#faf8f3] rounded-3xl p-12 md:p-16 shadow-lg overflow-hidden">
+        <div className="relative bg-[#faf8f3] rounded-2xl md:rounded-3xl p-6 sm:p-10 md:p-16 shadow-lg overflow-hidden">
           
           {/* Top-left Blue Gradient Semi-half Circle with Extended Gradient */}
           <div className="absolute top-0 left-0 w-[250px] h-[250px] bg-gradient-to-br from-[#5C84BF]/60 via-[#5C84BF]/40 via-white/20 to-transparent rounded-full -translate-x-1/3 -translate-y-1/3"></div>
@@ -20,7 +20,7 @@ const HeroSection = () => {
           {/* Content Container - Centered */}
           <div className="relative z-10 text-center">
             {/* Main Headline - Centered with Spacing */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif leading-tight">
               <span className="text-gray-800 block mb-4">We first puts your goals</span>
               <span className="bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent font-bold block">
                 to derive results
@@ -28,13 +28,13 @@ const HeroSection = () => {
             </h1>
             
             {/* Descriptive Text - Centered */}
-            <p className="text-lg md:text-xl text-gray-700 mt-8 mb-12 leading-relaxed font-sans max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-700 mt-6 md:mt-8 mb-8 md:mb-12 leading-relaxed font-sans max-w-3xl mx-auto">
               At Apnaaapan, we handle it all—design, content, marketing, socials— to make your brand shine.
             </p>
             
             {/* CTA Button - Centered */}
-            <button className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center space-x-3 mx-auto">
-              <span className="text-white text-lg">📞</span>
+            <button className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center space-x-3 mx-auto">
+              <span className="text-white text-base sm:text-lg">📞</span>
               <span>Book a Free Strategy Call</span>
             </button>
           </div>
