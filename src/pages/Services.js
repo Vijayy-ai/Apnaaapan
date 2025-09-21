@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ClientFeedback from '../components/ClientFeedback';
 
 const Services = () => {
@@ -45,6 +45,35 @@ const Services = () => {
       [cardId]: !prev[cardId]
     }));
   };
+  // Mobile-friendly scroll reveal
+  const RevealOnScroll = ({ children }) => {
+    const ref = useRef(null);
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        setVisible(true);
+        return;
+      }
+      const el = ref.current;
+      if (!el) return;
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.unobserve(entry.target);
+        }
+      }, { threshold: 0.15 });
+      observer.observe(el);
+      return () => observer.disconnect();
+    }, []);
+
+    return (
+      <div ref={ref} className={`transform transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+        {children}
+      </div>
+    );
+  };
+
   return (
     <>
     <div className="min-h-screen bg-[#EFE7D5] py-16 px-4 sm:px-6 lg:px-8">
@@ -54,31 +83,40 @@ const Services = () => {
           {/* Left Section - Text Content */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-lg font-semibold text-[#F26B2A] mb-4 font-nexa-regular">
-                Social Media Marketing
-              </h3>
-              <h1 className="text-4xl md:text-5xl font-bold text-[#0D1B2A] mb-6 leading-tight font-serif">
-                From Likes to Leads – We Turn Social into Sales.
-              </h1>
-              <p className="text-lg text-[#5B5B5B] leading-relaxed font-nexa-regular">
-                Our social media services go beyond posting pretty pictures. We combine storytelling, data, and platform-specific strategies to engage your audience and drive measurable results.
-              </p>
+              <RevealOnScroll>
+                <h3 className="text-lg font-semibold text-[#F26B2A] mb-4 font-nexa-regular">
+                  Social Media Marketing
+                </h3>
+              </RevealOnScroll>
+              <RevealOnScroll>
+                <h1 className="text-4xl md:text-5xl font-bold text-[#0D1B2A] mb-6 leading-tight font-serif">
+                  From Likes to Leads – We Turn Social into Sales.
+                </h1>
+              </RevealOnScroll>
+              <RevealOnScroll>
+                <p className="text-lg text-[#5B5B5B] leading-relaxed font-nexa-regular">
+                  Our social media services go beyond posting pretty pictures. We combine storytelling, data, and platform-specific strategies to engage your audience and drive measurable results.
+                </p>
+              </RevealOnScroll>
             </div>
             
             {/* CTA Button */}
             <div className="pt-4">
+              <RevealOnScroll>
               <button className="bg-gradient-to-r from-[#F26B2A] to-[#FFC107] text-white px-8 py-4 rounded-full font-nexa-bold text-lg flex items-center space-x-3 hover:shadow-lg transition-all duration-200 hover:scale-105">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
                 <span>Book a Free Strategy Call</span>
               </button>
+              </RevealOnScroll>
             </div>
           </div>
 
           {/* Right Section - Dashboard Style Visual */}
           <div className="relative order-first lg:order-last">
             {/* Main Dashboard Card */}
+            <RevealOnScroll>
             <div className="bg-white rounded-3xl p-6 lg:p-8 shadow-2xl relative overflow-hidden transform hover:scale-105 transition-all duration-300">
               {/* Engagement Metrics Section */}
               <div className="mb-8">
@@ -161,6 +199,7 @@ const Services = () => {
                 </svg>
               </div>
             </div>
+            </RevealOnScroll>
 
             {/* Background Decorative Elements */}
             <div className="absolute -z-10 top-8 left-8 w-full h-full bg-gradient-to-br from-orange-100 to-yellow-100 rounded-3xl"></div>
@@ -212,9 +251,11 @@ const Services = () => {
 
         {/* We Help Solve Section */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif text-[#0D1B2A] mb-12">
-            We Help Solve
-          </h2>
+          <RevealOnScroll>
+            <h2 className="text-4xl md:text-5xl font-serif text-[#0D1B2A] mb-12">
+              We Help Solve
+            </h2>
+          </RevealOnScroll>
           
           <div className="max-w-4xl mx-auto space-y-6">
             {/* Problem 1 */}
@@ -373,15 +414,18 @@ const Services = () => {
 
         {/* Our Approach Section */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif text-[#0D1B2A] mb-16">
-            Our Approach
-          </h2>
+          <RevealOnScroll>
+            <h2 className="text-4xl md:text-5xl font-serif text-[#0D1B2A] mb-16">
+              Our Approach
+            </h2>
+          </RevealOnScroll>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
             {/* Step 1: Audit & Strategy */}
-            <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+            <RevealOnScroll>
+            <div className="group relative bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
               <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                <div className="w-16 h-16 bg-[#F26B2A] rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-[#F26B2A] rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                   <span className="text-white font-bold text-2xl">1</span>
                 </div>
               </div>
@@ -393,12 +437,15 @@ const Services = () => {
                   We start by analyzing your audience, competitors, and past performance to identify exactly where opportunities lie.
                 </p>
               </div>
+              <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 ring-transparent group-hover:ring-2 group-hover:ring-orange-300/60 transition-all duration-300"></div>
             </div>
+            </RevealOnScroll>
 
             {/* Step 2: Content Planning */}
-            <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+            <RevealOnScroll>
+            <div className="group relative bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
               <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                <div className="w-16 h-16 bg-[#F26B2A] rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-[#F26B2A] rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                   <span className="text-white font-bold text-2xl">2</span>
                 </div>
               </div>
@@ -410,12 +457,15 @@ const Services = () => {
                   A tailored content calendar with clear goals ensures your messaging is consistent and impactful.
                 </p>
               </div>
+              <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 ring-transparent group-hover:ring-2 group-hover:ring-orange-300/60 transition-all duration-300"></div>
             </div>
+            </RevealOnScroll>
 
             {/* Step 3: Creative Production */}
-            <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+            <RevealOnScroll>
+            <div className="group relative bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
               <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                <div className="w-16 h-16 bg-[#F26B2A] rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-[#F26B2A] rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                   <span className="text-white font-bold text-2xl">3</span>
                 </div>
               </div>
@@ -427,12 +477,15 @@ const Services = () => {
                   From visuals to copy and video, we create scroll-stopping content your audience will remember.
                 </p>
               </div>
+              <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 ring-transparent group-hover:ring-2 group-hover:ring-orange-300/60 transition-all duration-300"></div>
             </div>
+            </RevealOnScroll>
 
             {/* Step 4: Publishing & Engagement */}
-            <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+            <RevealOnScroll>
+            <div className="group relative bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
               <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                <div className="w-16 h-16 bg-[#F26B2A] rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-[#F26B2A] rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                   <span className="text-white font-bold text-2xl">4</span>
                 </div>
               </div>
@@ -444,12 +497,15 @@ const Services = () => {
                   Consistent posting paired with active community management to keep your brand in the conversation.
                 </p>
               </div>
+              <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 ring-transparent group-hover:ring-2 group-hover:ring-orange-300/60 transition-all duration-300"></div>
             </div>
+            </RevealOnScroll>
 
             {/* Step 5: Reporting & Optimization */}
-            <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+            <RevealOnScroll>
+            <div className="group relative bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
               <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                <div className="w-16 h-16 bg-[#F26B2A] rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-[#F26B2A] rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                   <span className="text-white font-bold text-2xl">5</span>
                 </div>
               </div>
@@ -461,15 +517,19 @@ const Services = () => {
                   We track performance, measure impact, and tweak campaigns for even better results over time.
                 </p>
               </div>
+              <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 ring-transparent group-hover:ring-2 group-hover:ring-orange-300/60 transition-all duration-300"></div>
             </div>
+            </RevealOnScroll>
           </div>
         </div>
 
         {/* Expected Outcomes Section */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif text-[#0D1B2A] mb-16">
-            Expected Outcomes
-          </h2>
+          <RevealOnScroll>
+            <h2 className="text-4xl md:text-5xl font-serif text-[#0D1B2A] mb-16">
+              Expected Outcomes
+            </h2>
+          </RevealOnScroll>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto mb-12">
             {/* Top-Left: Higher engagement rates */}
@@ -542,12 +602,16 @@ const Services = () => {
 
         {/* Your Dedicated Team Section */}
         <div className="mb-24">
-          <h2 className="text-4xl md:text-5xl font-serif text-[#0D1B2A]">
-            Your Dedicated Team
-          </h2>
-          <p className="mt-4 text-lg text-[#0D1B2A]/80 font-nexa-regular">
-            Meet the team behind making your appointments happen.
-          </p>
+          <RevealOnScroll>
+            <h2 className="text-4xl md:text-5xl font-serif text-[#0D1B2A]">
+              Your Dedicated Team
+            </h2>
+          </RevealOnScroll>
+          <RevealOnScroll>
+            <p className="mt-4 text-lg text-[#0D1B2A]/80 font-nexa-regular">
+              Meet the team behind making your appointments happen.
+            </p>
+          </RevealOnScroll>
 
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
             {[0, 1, 2, 3, 4].map((idx) => (

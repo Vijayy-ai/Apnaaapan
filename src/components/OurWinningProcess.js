@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 const OurWinningProcess = ({ compact = false, showSpacer = true, spacerScreens = 1 }) => {
   const sectionRef = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const processSteps = [
     {
@@ -44,6 +45,13 @@ const OurWinningProcess = ({ compact = false, showSpacer = true, spacerScreens =
   ];
 
   useEffect(() => {
+    const onResize = () => setIsSmallScreen(window.innerWidth < 768);
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
 
@@ -51,47 +59,42 @@ const OurWinningProcess = ({ compact = false, showSpacer = true, spacerScreens =
       const windowHeight = window.innerHeight;
       const sectionHeight = rect.height;
       
-      // Calculate scroll progress within the section
       const sectionTop = rect.top;
       const sectionBottom = rect.bottom;
       
       if (sectionTop <= windowHeight && sectionBottom >= 0) {
-        // Section is in view
         const progress = Math.max(0, Math.min(1, (windowHeight - sectionTop) / (windowHeight + sectionHeight)));
         setScrollProgress(progress);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial call
+    handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isSmallScreen]);
 
   const getCardTransform = (index) => {
-    const stepProgress = Math.max(0, Math.min(1, (scrollProgress - index * 0.25) / 0.25));
+    const stepSpan = isSmallScreen ? 0.25 : 0.25; // ensure 4th step reaches visibility
+    const stepProgress = Math.max(0, Math.min(1, (scrollProgress - index * stepSpan) / stepSpan));
     
     if (index === 0) {
       // Step 1 stays in place
       return 'translateY(0)';
     } else {
-      // Other steps slide up from below and cover 90% of previous card
-      const startY = 100; // Start 100% below
-      const endY = 10; // End covering 90% of previous card (10% from bottom)
+      // Other steps slide up from below; leave more of previous visible on mobile
+      const startY = isSmallScreen ? 115 : 100; // start slightly lower on mobile
+      const endY = isSmallScreen ? 22 : 10; // a bit more spacing on mobile
       const currentY = startY - (startY - endY) * stepProgress;
       return `translateY(${currentY}%)`;
     }
   };
 
   const getCardOpacity = (index) => {
-    const stepProgress = Math.max(0, Math.min(1, (scrollProgress - index * 0.25) / 0.25));
-    
-    if (index === 0) {
-      return 1; // Step 1 always visible
-    } else {
-      // Cards should be fully opaque when they appear, not transparent
-      return stepProgress > 0 ? 1 : 0;
-    }
+    const stepSpan = isSmallScreen ? 0.25 : 0.25;
+    const stepProgress = Math.max(0, Math.min(1, (scrollProgress - index * stepSpan) / stepSpan));
+    const baseOpacity = isSmallScreen ? 0.2 : 0; // faint visibility before activation on mobile
+    return stepProgress > 0 ? Math.min(1, baseOpacity + stepProgress * (1 - baseOpacity)) : baseOpacity;
   };
 
   const getCardZIndex = (index) => {
@@ -100,19 +103,18 @@ const OurWinningProcess = ({ compact = false, showSpacer = true, spacerScreens =
 
   return (
     <>
-      <section ref={sectionRef} className={`bg-[#EFE7D5] ${compact ? 'py-8 px-6' : 'py-16 px-8'} relative`}>
+      <section ref={sectionRef} className={`bg-[#EFE7D5] ${compact ? 'py-8 px-6' : 'py-16 px-4 md:px-8'} relative`}>
         <div className="max-w-7xl mx-auto relative">
           {/* Main Title */}
-          <div className={`text-center ${compact ? 'mb-6' : 'mb-12'} sticky ${compact ? 'top-4' : 'top-8'} z-50 bg-[#EFE7D5] ${compact ? 'py-2' : 'py-4'}`}>
-            <h2 className="text-4xl md:text-5xl font-serif text-gray-800">
+          <div className={`text-center ${compact ? 'mb-6' : 'mb-10 md:mb-12'} ${isSmallScreen ? '' : 'sticky'} ${compact ? 'top-4' : 'top-8'} z-50 bg-[#EFE7D5] ${compact ? 'py-2' : 'py-4'}`}>
+            <h2 className="text-3xl md:text-5xl font-serif text-gray-800">
               Our Winning Process
             </h2>
           </div>
 
-          {/* Process Steps Container */}
-          <div className={`relative ${compact ? 'h-[70vh]' : 'h-[80vh]'}`}> {/* Further reduced height for scroll animation */}
-            {/* Process Steps */}
-            <div className={`sticky ${compact ? 'top-24' : 'top-32'} space-y-6 flex flex-col items-center`}>
+          {/* Animated stacked cards for all screens (tuned for mobile) */}
+          <div className={`relative ${compact ? 'h-[80vh]' : (isSmallScreen ? 'h-[200vh]' : 'h-[80vh]')}`}>
+            <div className={`sticky ${compact ? 'top-24' : (isSmallScreen ? 'top-24' : 'top-32')} space-y-6 flex flex-col items-center`}>
               {processSteps.map((step, index) => (
                 <div 
                   key={index} 
@@ -121,29 +123,29 @@ const OurWinningProcess = ({ compact = false, showSpacer = true, spacerScreens =
                     opacity: getCardOpacity(index),
                     zIndex: getCardZIndex(index),
                     position: 'absolute',
-                    top: `${index * 20}%`, // Stack cards with spacing
+                    top: `${index * (isSmallScreen ? 26 : 20)}%`,
                     left: '50%',
                     transform: `translateX(-50%) ${getCardTransform(index)}`,
                   }}
                 >
                   <div className="flex flex-col lg:flex-row">
                     {/* Left Side - Text Content */}
-                    <div className="lg:w-1/2 p-8 bg-white">
+                    <div className="lg:w-1/2 p-5 md:p-8 bg-white">
                       <div className="flex flex-col h-full justify-center">
-                        <span className={`inline-block ${step.tagColor} text-white px-4 py-1 rounded-full text-sm font-medium w-fit mb-4`}>
+                        <span className={`inline-block ${step.tagColor} text-white px-3 md:px-4 py-1 rounded-full text-xs md:text-sm font-medium w-fit mb-2 md:mb-4`}>
                           {step.step}
                         </span>
-                        <h3 className="text-2xl md:text-3xl font-serif font-bold text-gray-800 mb-4">
+                        <h3 className="text-lg md:text-3xl font-serif font-bold text-gray-800 mb-2 md:mb-4">
                           {step.title}
                         </h3>
-                        <p className="text-gray-600 leading-relaxed">
+                        <p className="text-gray-600 text-sm md:text-base leading-relaxed">
                           {step.description}
                         </p>
                       </div>
                     </div>
 
                     {/* Right Side - Illustration */}
-                    <div className={`lg:w-1/2 p-8 ${step.bgColor} flex items-center justify-center min-h-[300px]`}>
+                    <div className={`lg:w-1/2 p-5 md:p-8 ${step.bgColor} flex items-center justify-center min-h-[220px] md:min-h-[300px]`}>
                       <img 
                         src={step.image} 
                         alt={`${step.title} illustration`}
@@ -162,7 +164,7 @@ const OurWinningProcess = ({ compact = false, showSpacer = true, spacerScreens =
       {showSpacer && (
         <div
           className="bg-[#EFE7D5]"
-          style={{ height: `${Math.max(1, spacerScreens) * 75}vh` }}
+          style={{ height: isSmallScreen ? `${Math.max(1, spacerScreens) * 82}vh` : `${Math.max(1, spacerScreens) * 75}vh` }}
         ></div>
       )}
     </>

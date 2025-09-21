@@ -23,7 +23,7 @@ const HowItWorksWithStickyHeading = () => {
 
   return (
     <>
-      <div className={`text-center ${isHeadingSticky && !releaseHeading ? 'sticky top-14 md:top-18 lg:top-20 z-40 bg-[#EFE7D5] bg-opacity-90' : ''}`}>
+      <div className={`text-center ${isHeadingSticky && !releaseHeading ? 'sticky top-14 md:top-16 lg:top-20 z-40 bg-[#EFE7D5] bg-opacity-90' : ''}`}>
         <div className="text-[#E2552A] text-sm md:text-base font-semibold tracking-wide mb-2">Our Process</div>
         <h3 className="font-serif text-[#0D1B2A] font-bold text-[32px] md:text-[44px] lg:text-[52px] leading-tight">How It Works</h3>
       </div>
@@ -66,26 +66,26 @@ const PartnerWithUs = () => {
   return (
     <div className="bg-[#EFE7D5]">
       {/* Hero Section */}
-      <section className="relative max-w-[1280px] mx-auto px-4 md:px-8 pt-20 md:pt-28 lg:pt-32 pb-32 lg:pb-40 min-h-[620px] md:min-h-[760px] lg:min-h-[840px]">
+      <section className="relative max-w-[1280px] mx-auto px-4 md:px-8 pt-16 md:pt-28 lg:pt-32 pb-28 md:pb-32 lg:pb-40 min-h-[560px] md:min-h-[760px] lg:min-h-[840px]">
         {/* top-right sparkle icon */}
         <img
           src="/images/partner_us/Subtract.png"
           alt="decorative sparkle"
-          className="absolute right-8 md:right-16 top-14 md:top-16 lg:top-20 w-14 md:w-20 lg:w-24 select-none pointer-events-none"
+          className="absolute right-6 md:right-16 top-12 md:top-16 lg:top-20 w-10 md:w-20 lg:w-24 select-none pointer-events-none"
         />
 
         {/* headline */}
         <div className="max-w-2xl">
-          <h1 className="font-serif text-[#0D1B2A] text-[48px] leading-[56px] md:text-[64px] md:leading-[72px] lg:text-[72px] lg:leading-[80px] font-bold">
+          <h1 className="font-serif text-[#0D1B2A] text-[36px] leading-[44px] md:text-[64px] md:leading-[72px] lg:text-[72px] lg:leading-[80px] font-bold">
             Partner With Us
           </h1>
-          <h2 className="mt-4 text-[#EB8F1C] font-serif text-[48px] leading-[56px] md:text-[64px] md:leading-[72px] lg:text-[72px] lg:leading-[80px] font-bold">
+          <h2 className="mt-3 text-[#EB8F1C] font-serif text-[32px] leading-[40px] md:text-[64px] md:leading-[72px] lg:text-[72px] lg:leading-[80px] font-bold">
             Let’s Build Better Together!
           </h2>
         </div>
 
         {/* CTA and intro text */}
-        <div className="mt-10 md:mt-12 max-w-xl">
+        <div className="mt-8 md:mt-12 max-w-xl">
           <button 
             onClick={() => {
               const readyToPartnerSection = document.getElementById('ready-to-partner');
@@ -101,7 +101,7 @@ const PartnerWithUs = () => {
             </svg>
           </button>
 
-          <p className="mt-7 text-[#202124] text-lg md:text-xl leading-8 max-w-[560px]">
+          <p className="mt-6 text-[#202124] text-base md:text-xl leading-7 md:leading-8 max-w-[560px]">
             Become our white-label partner. We’ll deliver the expertise, you take the credit — all at B2B rates.
           </p>
         </div>
@@ -110,7 +110,7 @@ const PartnerWithUs = () => {
         <img
           src="/images/Group 100.png"
           alt="Apnaaapan circular badge"
-          className="absolute left-1 md:left-6 bottom-12 md:bottom-16 w-28 md:w-36 lg:w-40 select-none z-10"
+          className="hidden md:block absolute left-6 bottom-16 w-36 lg:w-40 select-none z-10"
         />
 
         {/* right illustration of people on stairs */}
@@ -133,7 +133,7 @@ const PartnerWithUs = () => {
       </div>
 
       {/* Why Partner With Us - Section */}
-      <section className="max-w-[1100px] mx-auto px-4 md:px-8 pt-16 md:pt-18 lg:pt-20 pb-4 md:pb-6 text-center">
+      <section className="max-w-[1100px] mx-auto px-4 md:px-8 pt-12 md:pt-18 lg:pt-20 pb-4 md:pb-6 text-center">
         <div className="text-[#E2552A] text-sm md:text-base font-semibold tracking-wide mb-4">
           Why Partner With Us
         </div>
@@ -192,12 +192,12 @@ const PartnerWithUs = () => {
             </div>
 
             {/* Content */}
-            <div className="flex-1 p-8 lg:p-12">
-              <div className="flex items-start justify-between mb-6">
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0D1B2A] font-serif">
+            <div className="flex-1 p-6 md:p-8 lg:p-12">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 mb-6">
+                <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#0D1B2A] font-serif">
                   What sets us apart from others?
                 </h3>
-                <div className="flex space-x-1 ml-6">
+                <div className="flex space-x-1 sm:ml-6">
                   {[...Array(5)].map((_, i) => (
                     <svg key={i} className="w-6 h-6 text-[#FF6B35]" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -205,7 +205,7 @@ const PartnerWithUs = () => {
                   ))}
                 </div>
               </div>
-              <p className="text-lg md:text-xl leading-8 text-[#2C2C2C] max-w-5xl">
+              <p className="text-base md:text-xl leading-7 md:leading-8 text-[#2C2C2C] max-w-5xl">
                 We genuinely care about your goals. Every team here, from design to marketing, works with one focus: making sure you win. We don’t believe in one-size-fits-all solutions. Instead, we listen, we understand, and we build what actually works for you. It’s not just about delivering work—it’s about delivering impact.
               </p>
             </div>
@@ -215,11 +215,11 @@ const PartnerWithUs = () => {
 
       {/* Final CTA + Contact Form */}
       <section id="ready-to-partner" className="max-w-[1250px] mx-auto px-4 md:px-8 pt-6 md:pt-10 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 items-center">
           {/* Left: Heading + Illustration */}
           <div className="lg:col-span-6">
             <div className="text-[#E2552A] font-semibold mb-3">Ready to Partner With Us?</div>
-            <h3 className="font-serif text-[#0D1B2A] font-bold text-[36px] leading-[1.15] md:text-[52px] md:leading-[1.15]">
+            <h3 className="font-serif text-[#0D1B2A] font-bold text-[28px] leading-[1.2] md:text-[52px] md:leading-[1.15]">
               Let’s grow together. Share
               <br className="hidden md:block" />
               your details & we’ll reach out.
@@ -231,41 +231,41 @@ const PartnerWithUs = () => {
 
           {/* Right: Form Card */}
           <div className="lg:col-span-6">
-            <div className="bg-white rounded-[28px] shadow-xl border border-[#EEE7D8] p-5 md:p-6 lg:p-8">
-              <div className="text-[#0D1B2A] text-base md:text-lg font-medium mb-4">Let us know more about you and your goals</div>
+            <div className="bg-white rounded-[28px] shadow-xl border border-[#EEE7D8] p-4 md:p-6 lg:p-8">
+              <div className="text-[#0D1B2A] text-sm md:text-lg font-medium mb-4">Let us know more about you and your goals</div>
 
               {/* Name row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                <input className="rounded-full border border-[#E5E7EB] px-5 py-3 focus:outline-none" placeholder="First Name" />
-                <input className="rounded-full border border-[#E5E7EB] px-5 py-3 focus:outline-none" placeholder="Last Name" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-4">
+                <input className="rounded-full border border-[#E5E7EB] px-4 md:px-5 py-3 text-sm md:text-base focus:outline-none" placeholder="First Name" />
+                <input className="rounded-full border border-[#E5E7EB] px-4 md:px-5 py-3 text-sm md:text-base focus:outline-none" placeholder="Last Name" />
               </div>
 
               {/* Agency */}
               <div className="mb-4">
-                <input className="w-full rounded-full border border-[#E5E7EB] px-5 py-3 focus:outline-none" placeholder="Agency / Organization" />
+                <input className="w-full rounded-full border border-[#E5E7EB] px-4 md:px-5 py-3 text-sm md:text-base focus:outline-none" placeholder="Agency / Organization" />
               </div>
 
               {/* Email */}
               <div className="mb-4">
-                <input className="w-full rounded-full border border-[#E5E7EB] px-5 py-3 focus:outline-none" placeholder="Mail" />
+                <input className="w-full rounded-full border border-[#E5E7EB] px-4 md:px-5 py-3 text-sm md:text-base focus:outline-none" placeholder="Mail" />
               </div>
 
               {/* Phone */}
-              <div className="grid grid-cols-[90px,1fr] gap-3 mb-4">
-                <input className="rounded-full border border-[#E5E7EB] px-5 py-3 focus:outline-none" defaultValue={"+91"} />
-                <input className="rounded-full border border-[#E5E7EB] px-5 py-3 focus:outline-none" placeholder="Phone Number" />
+              <div className="grid grid-cols-1 sm:grid-cols-[90px,1fr] gap-3 mb-4">
+                <input className="rounded-full border border-[#E5E7EB] px-4 md:px-5 py-3 text-sm md:text-base focus:outline-none" defaultValue={"+91"} />
+                <input className="rounded-full border border-[#E5E7EB] px-4 md:px-5 py-3 text-sm md:text-base focus:outline-none" placeholder="Phone Number" />
               </div>
 
               {/* Question */}
               <div className="mb-5">
-                <textarea className="w-full rounded-2xl border border-[#E5E7EB] px-5 py-4 min-h-[160px] focus:outline-none" placeholder="Enter your question here" />
+                <textarea className="w-full rounded-2xl border border-[#E5E7EB] px-4 md:px-5 py-4 min-h-[140px] md:min-h-[160px] text-sm md:text-base focus:outline-none" placeholder="Enter your question here" />
               </div>
 
               {/* Submit */}
               <button className="w-full rounded-full text-white font-semibold py-3 bg-gradient-to-r from-[#F26B2A] to-[#FFC107]">Submit</button>
 
               {/* Fine print */}
-              <p className="mt-4 text-[11px] text-[#6B7280] leading-relaxed text-center">
+              <p className="mt-4 text-[10px] md:text-[11px] text-[#6B7280] leading-relaxed text-center">
                 By entering my phone number in the form, I agree to receive recurring automated
                 marketing text messages. Msg & data rates may apply; msg frequency varies. Reply HELP
                 for help and STOP to unsubscribe. Terms of Use and Privacy Policy.

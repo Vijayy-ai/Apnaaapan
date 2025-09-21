@@ -77,7 +77,7 @@ const Work = () => {
   return (
     <>
       {/* Our Recent Work Section */}
-      <section className="relative py-32 px-8">
+      <section className="relative px-4 md:px-8 py-16 md:py-32">
         {/* Background decorative lines */}
         <div className="absolute left-0 top-0 w-full h-full pointer-events-none">
           <div className="absolute left-8 top-0 w-px h-full bg-gray-300">
@@ -91,7 +91,7 @@ const Work = () => {
         {/* Main Content */}
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Title */}
-          <h1 className="text-5xl md:text-6xl font-serif font-bold mb-8">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-serif font-bold mb-4 md:mb-8 leading-tight">
             <span className="text-[#1a365d]">Our recent</span>{' '}
             <span className="bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent">
               work
@@ -99,7 +99,7 @@ const Work = () => {
           </h1>
           
           {/* Subtitle */}
-          <div className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto space-y-4">
+          <div className="text-sm sm:text-base md:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto space-y-2 md:space-y-4">
             <p>Discover our latest creations, where innovation and design excellence</p>
             <p>come together to deliver impactful solutions and drive success.</p>
             <p>and drive success.</p>
@@ -128,21 +128,21 @@ const Work = () => {
           </div>
 
           {/* Project Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto px-2 md:px-0">
             {filteredProjects.map((project) => (
               <div key={project.id} className="animate-fadeIn">
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
-                  <div className="aspect-video bg-gray-200 relative">
+                <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                  <div className="aspect-video bg-gray-200 relative overflow-hidden">
                     <img 
                       src={project.image} 
                       alt={project.alt} 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-110"
                     />
                   </div>
                 </div>
                 <div className="mt-4">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">{project.title}</h3>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-1 md:mb-2">{project.title}</h3>
+                  <p className="text-gray-600 text-sm md:text-base mb-3 md:mb-4">{project.description}</p>
                                        <div className="flex flex-wrap gap-2">
                        {project.tags.map((tag, index) => (
                          <span 

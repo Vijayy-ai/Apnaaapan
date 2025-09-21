@@ -41,10 +41,10 @@ const ClientFeedback = () => {
   ];
 
   return (
-    <section className="bg-[#EFE7D5] py-16">
+    <section className="bg-[#EFE7D5] py-12 md:py-16">
       <div className="max-w-6xl mx-auto px-8">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-12">
           <p className="text-blue-600 text-sm font-medium mb-2">Client Feedback</p>
           <h2 className="text-4xl md:text-5xl font-serif text-gray-800">
             What They Say After Using Our Product

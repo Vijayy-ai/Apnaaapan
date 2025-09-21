@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const services = [
   {
@@ -30,36 +30,75 @@ const services = [
 
 const OurServices = ({ showHeader = true, items }) => {
   const scrollContainerRef = useRef(null);
+  const firstCardRef = useRef(null);
+  const secondCardRef = useRef(null);
+  const [cardWidth, setCardWidth] = useState(400);
+  const [gapPx, setGapPx] = useState(20); // Tailwind space-x-5 = 1.25rem ~ 20px
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [stepDistance, setStepDistance] = useState(420);
   const itemsToRender = items && items.length ? items : services;
 
+  useEffect(() => {
+    const measure = () => {
+      if (firstCardRef.current) {
+        setCardWidth(firstCardRef.current.offsetWidth);
+      }
+      // Prefer measuring distance between first two cards to include margins/padding
+      if (firstCardRef.current && secondCardRef.current) {
+        const step = Math.abs(secondCardRef.current.offsetLeft - firstCardRef.current.offsetLeft);
+        if (step > 0) {
+          setStepDistance(step);
+        }
+      } else {
+        // Fallback to width + assumed gap
+        setStepDistance(cardWidth + gapPx);
+      }
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, []);
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const onScroll = () => {
+      const step = stepDistance || (cardWidth + gapPx);
+      if (step <= 0) return;
+      const idx = Math.round(container.scrollLeft / step);
+      setCurrentIndex(idx);
+    };
+    container.addEventListener('scroll', onScroll, { passive: true });
+    return () => container.removeEventListener('scroll', onScroll);
+  }, [cardWidth, gapPx, stepDistance]);
+
+  const scrollToIndex = (index) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const step = stepDistance || (cardWidth + gapPx);
+    const maxScrollLeft = container.scrollWidth - container.clientWidth;
+    const targetLeft = Math.min(Math.max(0, index * step), Math.max(0, maxScrollLeft));
+    container.scrollTo({ left: targetLeft, behavior: 'smooth' });
+  };
+
   const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const scrollAmount = 420; // Card width (400px) + gap (20px)
-      container.scrollBy({
-        left: -scrollAmount,
-        behavior: 'smooth'
-      });
-    }
+    scrollToIndex(Math.max(0, currentIndex - 1));
   };
 
   const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const scrollAmount = 420; // Card width (400px) + gap (20px)
-      container.scrollBy({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
-    }
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const step = cardWidth + gapPx;
+    const maxIndex = Math.ceil((container.scrollWidth - container.clientWidth) / step);
+    scrollToIndex(Math.min(maxIndex, currentIndex + 1));
   };
 
   return (
-    <section className="bg-[#EFE7D5] py-20 px-4 md:px-8 overflow-x-hidden">
+    <section className="bg-[#EFE7D5] py-14 md:py-20 px-4 md:px-8 overflow-x-hidden">
       <div className="max-w-7xl mx-auto overflow-x-hidden">
         {/* Header Section */}
         {showHeader && (
-          <div className="flex flex-col lg:flex-row items-center justify-between mb-20">
+          <div className="flex flex-col lg:flex-row items-center justify-between mb-12 md:mb-20">
             <div className="lg:w-1/2 mb-10 lg:mb-0">
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-[#1a2236] mb-4 tracking-tight">
                 Our Services
@@ -93,7 +132,7 @@ const OurServices = ({ showHeader = true, items }) => {
         {/* Navigation Arrows */}
         <button 
           onClick={scrollLeft}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-200 active:scale-95"
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-200 active:scale-95"
           aria-label="Scroll left"
         >
           <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -103,7 +142,7 @@ const OurServices = ({ showHeader = true, items }) => {
         
         <button 
           onClick={scrollRight}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-200 active:scale-95"
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-200 active:scale-95"
           aria-label="Scroll right"
         >
           <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -114,12 +153,16 @@ const OurServices = ({ showHeader = true, items }) => {
         {/* Cards Container with Horizontal Scrolling */}
         <div 
           ref={scrollContainerRef}
-          className="flex space-x-5 overflow-x-auto pb-4 px-4" 
+          className="flex space-x-5 overflow-x-auto pb-2 md:pb-4 px-4" 
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {itemsToRender.map((service, index) => (
-            <div key={service.id} className="flex-shrink-0 w-[400px]">
-              <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-300 group relative overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl" style={{ height: '520px' }}>
+            <div 
+              key={service.id} 
+              className="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px]" 
+              ref={index === 0 ? firstCardRef : (index === 1 ? secondCardRef : null)}
+            >
+              <div className="bg-white rounded-3xl p-6 md:p-8 shadow-lg border border-gray-300 group relative overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl h-[460px] md:h-[520px]">
                 {/* Hover Background Gradient */}
                 <div className="absolute inset-0 bg-gradient-to-b from-orange-600 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out rounded-3xl"></div>
                 
@@ -136,10 +179,10 @@ const OurServices = ({ showHeader = true, items }) => {
                     <span className="text-orange-500 font-bold text-lg mb-6 block tracking-wider group-hover:text-white transition-colors duration-300">
                       ({service.id})
                     </span>
-                    <h3 className="text-2xl md:text-3xl font-serif font-bold text-[#1a2236] mb-6 group-hover:text-white transition-colors duration-300 leading-tight">
+                    <h3 className="text-xl md:text-3xl font-serif font-bold text-[#1a2236] mb-4 md:mb-6 group-hover:text-white transition-colors duration-300 leading-tight">
                       {service.title}
                     </h3>
-                    <p className="text-[#22223b] leading-relaxed text-base group-hover:text-white transition-colors duration-300">
+                    <p className="text-[#22223b] leading-relaxed text-sm md:text-base group-hover:text-white transition-colors duration-300">
                       {service.description}
                     </p>
                   </div>

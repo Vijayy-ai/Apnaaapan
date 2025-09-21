@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const photos = [
   '/images/image 12.png',
@@ -8,27 +8,62 @@ const photos = [
 
 const OurStory = () => {
   const scrollContainerRef = useRef(null);
+  const firstCardRef = useRef(null);
+  const secondCardRef = useRef(null);
+  const [cardWidth, setCardWidth] = useState(400);
+  const [gapPx, setGapPx] = useState(20);
+  const [stepDistance, setStepDistance] = useState(420);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const measure = () => {
+      if (firstCardRef.current) {
+        setCardWidth(firstCardRef.current.offsetWidth);
+      }
+      if (firstCardRef.current && secondCardRef.current) {
+        const step = Math.abs(secondCardRef.current.offsetLeft - firstCardRef.current.offsetLeft);
+        if (step > 0) setStepDistance(step);
+      } else {
+        setStepDistance(cardWidth + gapPx);
+      }
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [cardWidth, gapPx]);
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const onScroll = () => {
+      const step = stepDistance || (cardWidth + gapPx);
+      if (step <= 0) return;
+      const idx = Math.round(container.scrollLeft / step);
+      setCurrentIndex(idx);
+    };
+    container.addEventListener('scroll', onScroll, { passive: true });
+    return () => container.removeEventListener('scroll', onScroll);
+  }, [stepDistance, cardWidth, gapPx]);
+
+  const scrollToIndex = (index) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const step = stepDistance || (cardWidth + gapPx);
+    const maxScrollLeft = container.scrollWidth - container.clientWidth;
+    const targetLeft = Math.min(Math.max(0, index * step), Math.max(0, maxScrollLeft));
+    container.scrollTo({ left: targetLeft, behavior: 'smooth' });
+  };
 
   const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const scrollAmount = 420; // Card width (400px) + gap (20px)
-      container.scrollBy({
-        left: -scrollAmount,
-        behavior: 'smooth'
-      });
-    }
+    scrollToIndex(Math.max(0, currentIndex - 1));
   };
 
   const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const scrollAmount = 420; // Card width (400px) + gap (20px)
-      container.scrollBy({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
-    }
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const step = stepDistance || (cardWidth + gapPx);
+    const maxIndex = Math.ceil((container.scrollWidth - container.clientWidth) / step);
+    scrollToIndex(Math.min(maxIndex, currentIndex + 1));
   };
 
   return (
@@ -97,19 +132,19 @@ const OurStory = () => {
           {/* Right Column - Founder Profile */}
           <div className="lg:col-span-7 flex justify-center lg:justify-end">
             <div className="relative">
-              <div className="w-80 h-96 md:w-96 md:h-[28rem] lg:w-[28rem] lg:h-[32rem] rounded-2xl overflow-hidden shadow-lg">
+              <div className="w-72 h-88 sm:w-80 sm:h-96 md:w-96 md:h-[28rem] lg:w-[28rem] lg:h-[32rem] rounded-2xl overflow-hidden shadow-lg">
                 <img
                   src="/images/gaurav.png"
                   alt="Gourav Sharma"
                   className="w-full h-full object-cover"
                 />
                 {/* Badges positioned at bottom-left of image */}
-                <div className="absolute -bottom-3 left-6 flex flex-row gap-3">
-                  <span className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#DF5316] to-[#F4BF11] text-white text-sm font-medium rounded-full shadow-md" style={{ fontFamily: 'NexaBold' }}>
+                <div className="absolute -bottom-3 left-4 sm:left-6 flex flex-row gap-2 sm:gap-3">
+                  <span className="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-[#DF5316] to-[#F4BF11] text-white text-xs sm:text-sm font-medium rounded-full shadow-md" style={{ fontFamily: 'NexaBold' }}>
                     <span className="mr-2 text-white">⭐</span>
                     Founder
                   </span>
-                  <span className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#DF5316] to-[#F4BF11] text-white text-sm font-medium rounded-full shadow-md" style={{ fontFamily: 'NexaBold' }}>
+                  <span className="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-[#DF5316] to-[#F4BF11] text-white text-xs sm:text-sm font-medium rounded-full shadow-md" style={{ fontFamily: 'NexaBold' }}>
                     <span className="mr-2 text-white">⭐</span>
                     Gourav Sharma
                   </span>
@@ -124,25 +159,25 @@ const OurStory = () => {
           {/* Left Column - Co-Founder Profile */}
           <div className="lg:col-span-7 flex justify-center lg:justify-start">
             <div className="relative">
-              <div className="w-80 h-96 md:w-96 md:h-[28rem] lg:w-[28rem] lg:h-[32rem] rounded-2xl overflow-hidden shadow-lg">
+              <div className="w-72 h-88 sm:w-80 sm:h-96 md:w-96 md:h-[28rem] lg:w-[28rem] lg:h-[32rem] rounded-2xl overflow-hidden shadow-lg">
                 <img
                   src="/images/kartik patel.png"
                   alt="Karthik Patel"
                   className="w-full h-full object-cover"
                 />
                 {/* Badges positioned at bottom-left of image */}
-                <div className="absolute -bottom-3 left-6 flex flex-row gap-3">
-                  <span className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#DF5316] to-[#F4BF11] text-white text-sm font-medium rounded-full shadow-md" style={{ fontFamily: 'NexaBold' }}>
+                  <div className="absolute -bottom-3 left-4 sm:left-6 flex flex-row gap-2 sm:gap-3">
+                  <span className="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-[#DF5316] to-[#F4BF11] text-white text-xs sm:text-sm font-medium rounded-full shadow-md" style={{ fontFamily: 'NexaBold' }}>
                     <span className="mr-2 text-white">⭐</span>
                     Co-Founder
                   </span>
-                  <span className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#DF5316] to-[#F4BF11] text-white text-sm font-medium rounded-full shadow-md" style={{ fontFamily: 'NexaBold' }}>
+                  <span className="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-[#DF5316] to-[#F4BF11] text-white text-xs sm:text-sm font-medium rounded-full shadow-md" style={{ fontFamily: 'NexaBold' }}>
                     <span className="mr-2 text-white">⭐</span>
                     Karthik Patel
                   </span>
+                  </div>
                 </div>
               </div>
-            </div>
           </div>
 
           {/* Right Column - Additional Description */}
@@ -328,7 +363,7 @@ const OurStory = () => {
           {/* Navigation Arrows */}
           <button 
             onClick={scrollLeft}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-200 active:scale-95"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-200 active:scale-95"
             aria-label="Scroll left"
           >
             <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -338,7 +373,7 @@ const OurStory = () => {
           
           <button 
             onClick={scrollRight}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-200 active:scale-95"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-200 active:scale-95"
             aria-label="Scroll right"
           >
             <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -379,8 +414,8 @@ const OurStory = () => {
                 description: "Launched our innovation lab to develop cutting-edge marketing technologies."
               }
             ].map((milestone, index) => (
-              <div key={milestone.id} className="flex-shrink-0 w-[400px]">
-                <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-300 group relative overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl" style={{ height: '520px' }}>
+              <div key={milestone.id} className="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px]" ref={index === 0 ? firstCardRef : (index === 1 ? secondCardRef : null)}>
+                <div className="bg-white rounded-3xl p-6 md:p-8 shadow-lg border border-gray-300 group relative overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl h-[460px] md:h-[520px]">
                   {/* Hover Background Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-b from-orange-600 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out rounded-3xl"></div>
                   
@@ -397,10 +432,10 @@ const OurStory = () => {
                       <span className="text-orange-500 font-bold text-lg mb-6 block tracking-wider group-hover:text-white transition-colors duration-300">
                         ({milestone.id})
                       </span>
-                      <h3 className="text-2xl md:text-3xl font-serif font-bold text-[#1a2236] mb-6 group-hover:text-white transition-colors duration-300 leading-tight">
+                      <h3 className="text-xl md:text-3xl font-serif font-bold text-[#1a2236] mb-4 md:mb-6 group-hover:text-white transition-colors duration-300 leading-tight">
                         {milestone.title}
                       </h3>
-                      <p className="text-[#22223b] leading-relaxed text-base group-hover:text-white transition-colors duration-300">
+                      <p className="text-[#22223b] leading-relaxed text-sm md:text-base group-hover:text-white transition-colors duration-300">
                         {milestone.description}
                       </p>
                     </div>
@@ -417,5 +452,8 @@ const OurStory = () => {
 };
 
 export default OurStory;
+
+
+
 
 

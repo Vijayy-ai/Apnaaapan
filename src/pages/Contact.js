@@ -28,19 +28,19 @@ const Contact = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
           {/* Left Section - Connect With Us */}
-          <div className="space-y-12">
-            <div>
+          <div className="space-y-12 animate-fadeIn" style={{ animationDelay: '50ms' }}>
+            <div className="animate-fadeIn" style={{ animationDelay: '100ms' }}>
               <h2 className="text-3xl md:text-4xl font-bold text-[#0D1B2A] mb-6" style={{ fontFamily: 'MADE Avenue PERSONAL USE' }}>
                 Connect With <span className="text-[#FFC107]">Us</span>
               </h2>
-              <p className="text-lg text-[#5B5B5B] leading-relaxed" style={{ fontFamily: 'nexaRegular' }}>
+              <p className="text-lg text-[#5B5B5B] leading-relaxed animate-fadeIn" style={{ fontFamily: 'nexaRegular', animationDelay: '140ms' }}>
                 Have service-related questions or interested in other collaborations? We're here to support you every step of the way.
               </p>
             </div>
 
             <div className="space-y-12">
               {/* Learn about our services */}
-              <div>
+              <div className="animate-fadeIn" style={{ animationDelay: '180ms' }}>
                 <h3 className="text-xl font-semibold text-[#0D1B2A] mb-6" style={{ fontFamily: 'nexaRegular' }}>
                   Learn about our services
                 </h3>
@@ -62,7 +62,7 @@ const Contact = () => {
               </div>
 
               {/* Talk to our PR department */}
-              <div>
+              <div className="animate-fadeIn" style={{ animationDelay: '220ms' }}>
                 <h3 className="text-xl font-semibold text-[#0D1B2A] mb-6" style={{ fontFamily: 'nexaRegular' }}>
                   Talk to our PR department
                 </h3>
@@ -84,7 +84,7 @@ const Contact = () => {
               </div>
 
               {/* Join our team */}
-              <div>
+              <div className="animate-fadeIn" style={{ animationDelay: '260ms' }}>
                 <h3 className="text-xl font-semibold text-[#0D1B2A] mb-6" style={{ fontFamily: 'nexaRegular' }}>
                   Join our team
                 </h3>
@@ -108,7 +108,7 @@ const Contact = () => {
           </div>
 
           {/* Right Section - Contact Form */}
-          <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
+          <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 animate-fadeIn" style={{ animationDelay: '180ms' }}>
             <h2 className="text-2xl font-bold text-[#0D1B2A] mb-6" style={{ fontFamily: 'MADE Avenue PERSONAL USE' }}>
               Let us know more about you and your goals
             </h2>
@@ -238,7 +238,7 @@ const Contact = () => {
         </div>
 
         {/* Google Maps Section */}
-        <div className="mt-20 mb-20">
+        <div className="mt-20 mb-20 animate-fadeIn" style={{ animationDelay: '280ms' }}>
           <div className="bg-white rounded-3xl p-2 shadow-lg border border-gray-100">
             <div className="relative h-[600px] w-full rounded-2xl overflow-hidden">
               {/* Google Maps iframe - Replace with your actual Google Maps embed code */}
