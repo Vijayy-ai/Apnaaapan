@@ -75,12 +75,8 @@ const Header = () => {
         
         {/* Navigation Links - Center (with dropdown groupings) */}
         <div className="hidden md:flex items-center space-x-8 relative">
-          {/* Our Story group */}
-          <div 
-            className="relative"
-            onMouseEnter={() => handleGroupEnter('ourStory')}
-            onMouseLeave={handleGroupLeave}
-          >
+          {/* Our Story (simple link, submenu removed) */}
+          <div className="relative">
             <a 
               href="/our-story" 
               className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
@@ -89,28 +85,11 @@ const Header = () => {
             >
               <span className="inline-flex items-center gap-1">
                 <span>Our Story</span>
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 20 20" 
-                  fill="currentColor" 
-                  className={`w-4 h-4 transition-transform duration-200 ${openMenu === 'ourStory' ? 'rotate-180' : 'rotate-0'}`}
-                  aria-hidden="true"
-                >
-                  <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" />
-                </svg>
               </span>
               {currentPath === '/our-story' && (
                 <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
               )}
             </a>
-            {openMenu === 'ourStory' && (
-              <div className="absolute left-0 top-full mt-2">
-                <div className="rounded-xl bg-white shadow-lg ring-1 ring-black/5 py-2 min-w-[180px]">
-                  <a href="/partner-with-us" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">Partner With Us</a>
-                  <a href="/about-us" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">About Us</a>
-                </div>
-              </div>
-            )}
           </div>
 
           {/* Work group */}
@@ -217,24 +196,8 @@ const Header = () => {
         className={`md:hidden fixed top-[57px] left-0 right-0 bg-[#EFE7D5] border-b border-gray-200 shadow-sm transition-max-height duration-300 overflow-hidden ${isMobileMenuOpen ? 'max-h-[80vh]' : 'max-h-0'}`}
       >
         <div className="px-4 py-3 space-y-1">
-          {/* Our Story group (accordion) */}
-          <button
-            className="w-full flex items-center justify-between py-3 text-[#3B3B3B] font-dm-sans-medium"
-            onClick={() => setMobileSubmenuOpen((k) => (k === 'ourStory' ? null : 'ourStory'))}
-          >
-            <span className="inline-flex items-center gap-2">
-              <span>Our Story</span>
-            </span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className={`w-5 h-5 transition-transform ${mobileSubmenuOpen === 'ourStory' ? 'rotate-180' : ''}`}> 
-              <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" />
-            </svg>
-          </button>
-          {mobileSubmenuOpen === 'ourStory' && (
-            <div className="pl-4 pb-2 space-y-1">
-              <a href="/partner-with-us" className="block py-2 text-sm text-[#3B3B3B]">Partner With Us</a>
-              <a href="/about-us" className="block py-2 text-sm text-[#3B3B3B]">About Us</a>
-            </div>
-          )}
+          {/* Our Story (simple link) */}
+          <a href="/our-story" className="block py-3 text-[#3B3B3B] font-dm-sans-medium">Our Story</a>
 
           {/* Work group (accordion) */}
           <button

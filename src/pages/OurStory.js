@@ -68,7 +68,7 @@ const OurStory = () => {
 
   return (
     <main className="bg-[#EFE7D5] min-h-screen">
-      <section className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10 py-20 md:py-32">
+      <section className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10 pt-20 md:pt-28 pb-8 md:pb-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-start">
           <div className="md:col-span-7">
             <h1 className="text-4xl md:text-5xl lg:text-6xl text-[#0D1B2A] tracking-tight font-serif">
@@ -81,7 +81,7 @@ const OurStory = () => {
 
           <div className="md:col-span-5 flex justify-center md:justify-end">
             <img
-              src="/images/Logo Icon A 4.png"
+              src="/images/Group 100.png"
               alt="Apnaaapan monogram"
               className="w-28 h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 object-contain select-none"
             />
@@ -112,11 +112,11 @@ const OurStory = () => {
       </section>
 
       {/* Our People Section */}
-      <section className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10 py-16 md:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20">
+      <section className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10 py-12 md:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           {/* Left Column - Title and Description */}
           <div className="lg:col-span-5 lg:pr-8 flex flex-col justify-center">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0D1B2A] mb-8 leading-tight" style={{ fontFamily: 'MADE Avenue PERSONAL USE' }}>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0D1B2A] mb-6 md:mb-8 leading-tight" style={{ fontFamily: 'MADE Avenue PERSONAL USE' }}>
               Our People
             </h2>
             <div className="space-y-4">
@@ -155,7 +155,7 @@ const OurStory = () => {
         </div>
 
         {/* Bottom Row - Co-Founder and Additional Description */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 mt-20 lg:mt-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mt-12 md:mt-16 lg:mt-16">
           {/* Left Column - Co-Founder Profile */}
           <div className="lg:col-span-7 flex justify-center lg:justify-start">
             <div className="relative">
@@ -190,7 +190,7 @@ const OurStory = () => {
       </section>
 
       {/* Photo Grid Section */}
-      <section className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10 py-16 md:py-20">
+      <section className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10 pt-12 md:pt-16 pb-16 md:pb-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {[
             { name: "Yashaswi Mertiya", role: "Social Media Manager" },

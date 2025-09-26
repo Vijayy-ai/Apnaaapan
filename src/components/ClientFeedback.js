@@ -58,7 +58,7 @@ const ClientFeedback = () => {
         <div className="flex mb-8 animate-scroll-left">
           {[...testimonials, ...testimonials].map((testimonial, index) => (
             <div key={`row1-${index}`} className="flex-shrink-0 w-96 mx-6">
-              <div className="bg-white rounded-2xl p-6 shadow-lg h-48">
+              <div className="bg-white rounded-2xl p-6 shadow-lg min-h-[12rem] h-auto overflow-hidden">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center">
                     <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-2xl mr-3">
@@ -73,7 +73,7 @@ const ClientFeedback = () => {
                     <span>★★★★★</span>
                   </div>
                 </div>
-                <p className="text-gray-700 text-sm leading-relaxed">
+                <p className="text-gray-700 text-sm leading-relaxed break-words">
                   {testimonial.feedback}
                 </p>
               </div>
@@ -85,7 +85,7 @@ const ClientFeedback = () => {
         <div className="flex animate-scroll-right">
           {[...testimonials, ...testimonials].map((testimonial, index) => (
             <div key={`row2-${index}`} className="flex-shrink-0 w-96 mx-6">
-              <div className="bg-white rounded-2xl p-6 shadow-lg h-48">
+              <div className="bg-white rounded-2xl p-6 shadow-lg min-h-[12rem] h-auto overflow-hidden">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center">
                     <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-2xl mr-3">
@@ -100,7 +100,7 @@ const ClientFeedback = () => {
                     <span>★★★★★</span>
                   </div>
                 </div>
-                <p className="text-gray-700 text-sm leading-relaxed">
+                <p className="text-gray-700 text-sm leading-relaxed break-words">
                   {testimonial.feedback}
                 </p>
               </div>

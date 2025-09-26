@@ -2,14 +2,14 @@ import React from 'react';
 
 const WorkWithUs = () => {
   return (
-    <div className="min-h-screen bg-[#EFE7D5] py-60 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#EFE7D5] px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="text-center mb-60">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#0D1B2A] mb-16 leading-tight" style={{ fontFamily: 'MADE Avenue PERSONAL USE' }}>
+        <div className="text-center min-h-screen flex flex-col justify-center items-center py-6">
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-[#0D1B2A] mb-6 leading-tight" style={{ fontFamily: 'MADE Avenue PERSONAL USE' }}>
             Shape Your Growth With <span className="text-[#FFC107]">Us</span>
           </h1>
-          <p className="text-xl md:text-2xl text-[#5B5B5B] max-w-4xl mx-auto leading-relaxed mb-20" style={{ fontFamily: 'NexaRegular' }}>
+          <p className="text-2xl md:text-3xl text-[#5B5B5B] max-w-4xl mx-auto leading-relaxed mb-6" style={{ fontFamily: 'NexaRegular' }}>
             Lorem ipsum dolor sit amet consectetur. Ultricies quis velit eu malesuada molestie arcu. Cursus interdum felis id lectus. A nullam erat aliquet mauris justo odio lorem. Nisl cum at non cras mi nibh accumsan dictum.
           </p>
           <button 

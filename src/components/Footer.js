@@ -25,7 +25,7 @@ const Footer = () => {
               <h3 className="text-gray-400 font-semibold text-lg mb-6">Quick Link</h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="/partner" className="text-white hover:text-orange-400 transition-colors duration-200 relative group">
+                  <a href="/partner-with-us" className="text-white hover:text-orange-400 transition-colors duration-200 relative group">
                     Partner with Us
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 transition-all duration-300 group-hover:w-full"></span>
                   </a>
@@ -43,8 +43,8 @@ const Footer = () => {
             <div>
               <h3 className="text-gray-400 font-semibold text-lg mb-6">Info</h3>
               <ul className="space-y-3">
-                <li><a href="/about" className="text-white hover:text-orange-400 transition-colors duration-200">About us</a></li>
-                <li><a href="/our-work" className="text-white hover:text-orange-400 transition-colors duration-200">Our Work</a></li>
+                <li><a href="/about-us" className="text-white hover:text-orange-400 transition-colors duration-200">About us</a></li>
+                <li><a href="/work" className="text-white hover:text-orange-400 transition-colors duration-200">Our Work</a></li>
                 <li><a href="/contact" className="text-white hover:text-orange-400 transition-colors duration-200">Contacts</a></li>
               </ul>
             </div>
@@ -100,17 +100,20 @@ const Footer = () => {
                 </svg>
               </a>
               
-              {/* Instagram */}
-              <a href="https://instagram.com/apnaaapan" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-pink-600 transition-colors duration-200">
-                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.244c-.875.807-2.026 1.297-3.323 1.297zm7.718-1.297c-.875.807-2.026 1.297-3.323 1.297s-2.448-.49-3.323-1.297c-.928-.796-1.418-1.947-1.418-3.244s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.323z"/>
+              {/* Instagram (refined glyph) */}
+              <a href="https://instagram.com/apnaaapan" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center transition-colors duration-200 hover:bg-gradient-to-tr hover:from-pink-500 hover:to-violet-500">
+                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" strokeWidth="2"/>
+                  <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="2"/>
+                  <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
                 </svg>
               </a>
               
-              {/* Twitter */}
-              <a href="https://twitter.com/apnaaapan" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors duration-200">
-                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              {/* X (formerly Twitter) */}
+              <a href="https://twitter.com/apnaaapan" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center transition-colors duration-200 hover:bg-gray-600">
+                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 4l16 16"/>
+                  <path d="M20 4L4 20"/>
                 </svg>
               </a>
               

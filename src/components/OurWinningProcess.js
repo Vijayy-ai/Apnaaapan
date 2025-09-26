@@ -61,9 +61,14 @@ const OurWinningProcess = ({ compact = false, showSpacer = true, spacerScreens =
       
       const sectionTop = rect.top;
       const sectionBottom = rect.bottom;
+
+      // Delay progress until the section reaches the viewport center
+      const startOffsetPx = windowHeight / 2;
       
       if (sectionTop <= windowHeight && sectionBottom >= 0) {
-        const progress = Math.max(0, Math.min(1, (windowHeight - sectionTop) / (windowHeight + sectionHeight)));
+        const shiftedNumerator = (windowHeight - sectionTop) - startOffsetPx;
+        const totalRange = Math.max(1, (windowHeight + sectionHeight - startOffsetPx));
+        const progress = Math.max(0, Math.min(1, shiftedNumerator / totalRange));
         setScrollProgress(progress);
       }
     };
@@ -118,7 +123,7 @@ const OurWinningProcess = ({ compact = false, showSpacer = true, spacerScreens =
               {processSteps.map((step, index) => (
                 <div 
                   key={index} 
-                  className={`${step.cardSize} w-full bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-1000 ease-out`}
+                  className={`${step.cardSize} w-full bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 ease-out`}
                   style={{
                     opacity: getCardOpacity(index),
                     zIndex: getCardZIndex(index),

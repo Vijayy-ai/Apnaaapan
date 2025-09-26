@@ -15,9 +15,13 @@ const StickySteps = ({ steps = [], onActiveChange, onProgress }) => {
 
       const sectionTopInDoc = el.offsetTop;
       const scrollY = window.scrollY || 0;
+
+      // Delay the start of progress until the section reaches the viewport center
+      const startOffsetPx = viewportH / 2; // begin when first card hits center
+      const shifted = scrollY - sectionTopInDoc - startOffsetPx;
       const progress = Math.min(
         1,
-        Math.max(0, (scrollY - sectionTopInDoc) / Math.max(1, totalScrollable))
+        Math.max(0, shifted / Math.max(1, totalScrollable))
       );
       const index = Math.min(steps.length - 1, Math.floor(progress * steps.length + 0.0001));
       setActiveIndex((prev) => {
@@ -49,7 +53,7 @@ const StickySteps = ({ steps = [], onActiveChange, onProgress }) => {
           {steps.map((step, i) => (
             <div
               key={i}
-              className={`absolute inset-0 p-6 md:p-8 transition-all duration-500 ease-out ${i === activeIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3 pointer-events-none'}`}
+              className={`absolute inset-0 p-6 md:p-8 transition-all duration-300 ease-out ${i === activeIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3 pointer-events-none'}`}
             >
               <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10 h-full">
                 <div className="md:w-1/2 order-2 md:order-1 bg-white/90 sm:bg-transparent rounded-xl p-4 sm:p-0">

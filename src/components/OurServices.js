@@ -29,6 +29,8 @@ const services = [
 ];
 
 const OurServices = ({ showHeader = true, items }) => {
+  const sectionRef = useRef(null);
+  const stickyRef = useRef(null);
   const scrollContainerRef = useRef(null);
   const firstCardRef = useRef(null);
   const secondCardRef = useRef(null);
@@ -37,6 +39,8 @@ const OurServices = ({ showHeader = true, items }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [stepDistance, setStepDistance] = useState(420);
   const itemsToRender = items && items.length ? items : services;
+  const [sectionHeightPx, setSectionHeightPx] = useState(0);
+  const [stickyHeightPx, setStickyHeightPx] = useState(0);
 
   useEffect(() => {
     const measure = () => {
@@ -59,18 +63,55 @@ const OurServices = ({ showHeader = true, items }) => {
     return () => window.removeEventListener('resize', measure);
   }, []);
 
+  // Measure cards and compute section height so vertical scroll length maps to total horizontal distance
   useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    const onScroll = () => {
-      const step = stepDistance || (cardWidth + gapPx);
-      if (step <= 0) return;
-      const idx = Math.round(container.scrollLeft / step);
-      setCurrentIndex(idx);
+    const measureHeights = () => {
+      const container = scrollContainerRef.current;
+      if (!container) return;
+      const viewportH = window.innerHeight || 0;
+      setStickyHeightPx(viewportH);
+      // Use ceil to avoid fractional off-by-one early release
+      const totalHorizontal = Math.max(0, Math.ceil(container.scrollWidth - container.clientWidth));
+      // Keep sticky until horizontal animation completes; add 1px buffer to prevent early release
+      const newSectionHeight = viewportH + totalHorizontal + 1;
+      setSectionHeightPx(newSectionHeight);
     };
-    container.addEventListener('scroll', onScroll, { passive: true });
-    return () => container.removeEventListener('scroll', onScroll);
-  }, [cardWidth, gapPx, stepDistance]);
+    measureHeights();
+    window.addEventListener('resize', measureHeights);
+    return () => window.removeEventListener('resize', measureHeights);
+  }, []);
+
+  // Drive horizontal scrollLeft from vertical scroll progress within the section
+  useEffect(() => {
+    const el = sectionRef.current;
+    const container = scrollContainerRef.current;
+    if (!el || !container) return;
+
+    const handleScroll = () => {
+      const rect = el.getBoundingClientRect();
+      const totalScrollableY = Math.max(1, sectionHeightPx - stickyHeightPx);
+      // Progress while the sticky area is on screen (locked to top, full height)
+      const progressedY = Math.min(totalScrollableY, Math.max(0, -rect.top));
+      const progress = progressedY / totalScrollableY;
+      const maxScrollLeft = Math.max(0, container.scrollWidth - container.clientWidth);
+      container.scrollLeft = maxScrollLeft * progress;
+
+      // Update pagination index based on mapped scrollLeft
+      const step = stepDistance || (cardWidth + gapPx);
+      if (step > 0) {
+        const idx = Math.round(container.scrollLeft / step);
+        setCurrentIndex(idx);
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [sectionRef, scrollContainerRef, sectionHeightPx, stickyHeightPx, stepDistance, cardWidth, gapPx]);
 
   const scrollToIndex = (index) => {
     const container = scrollContainerRef.current;
@@ -94,7 +135,7 @@ const OurServices = ({ showHeader = true, items }) => {
   };
 
   return (
-    <section className="bg-[#EFE7D5] py-14 md:py-20 px-4 md:px-8 overflow-x-hidden">
+    <section className="bg-[#EFE7D5] pt-14 md:pt-20 pb-0 px-4 md:px-8 overflow-x-hidden">
       <div className="max-w-7xl mx-auto overflow-x-hidden">
         {/* Header Section */}
         {showHeader && (
@@ -127,35 +168,16 @@ const OurServices = ({ showHeader = true, items }) => {
         )}
       </div>
       
-      {/* Services Cards with Pagination */}
-      <div className="relative">
-        {/* Navigation Arrows */}
-        <button 
-          onClick={scrollLeft}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-200 active:scale-95"
-          aria-label="Scroll left"
-        >
-          <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        
-        <button 
-          onClick={scrollRight}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-200 active:scale-95"
-          aria-label="Scroll right"
-        >
-          <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-        
-        {/* Cards Container with Horizontal Scrolling */}
-        <div 
-          ref={scrollContainerRef}
-          className="flex space-x-5 overflow-x-auto pb-2 md:pb-4 px-4" 
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
+      {/* Services Cards with scroll-controlled horizontal movement */}
+      <div className="relative" ref={sectionRef} style={{ height: sectionHeightPx ? `${sectionHeightPx}px` : '200vh' }}>
+        {/* Sticky viewport locks to top and fills viewport to freeze vertical motion */}
+        <div className="sticky top-0 h-screen flex items-center justify-center" ref={stickyRef}>
+          <div className="w-full">
+            <div 
+              ref={scrollContainerRef}
+              className="flex space-x-5 px-4 overflow-x-hidden"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
           {itemsToRender.map((service, index) => (
             <div 
               key={service.id} 
@@ -190,6 +212,8 @@ const OurServices = ({ showHeader = true, items }) => {
               </div>
             </div>
           ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
