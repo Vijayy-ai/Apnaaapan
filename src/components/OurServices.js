@@ -72,8 +72,8 @@ const OurServices = ({ showHeader = true, items }) => {
       setStickyHeightPx(viewportH);
       // Use ceil to avoid fractional off-by-one early release
       const totalHorizontal = Math.max(0, Math.ceil(container.scrollWidth - container.clientWidth));
-      // Keep sticky until horizontal animation completes; add 1px buffer to prevent early release
-      const newSectionHeight = viewportH + totalHorizontal + 1;
+      // Keep sticky until horizontal animation completes; ensure proper locking
+      const newSectionHeight = viewportH + totalHorizontal + 1; // Minimal buffer to prevent early release
       setSectionHeightPx(newSectionHeight);
     };
     measureHeights();
@@ -90,11 +90,18 @@ const OurServices = ({ showHeader = true, items }) => {
     const handleScroll = () => {
       const rect = el.getBoundingClientRect();
       const totalScrollableY = Math.max(1, sectionHeightPx - stickyHeightPx);
+      
+      // Only proceed if the section is in view
+      if (rect.top > 0 || rect.bottom < 0) return;
+      
       // Progress while the sticky area is on screen (locked to top, full height)
       const progressedY = Math.min(totalScrollableY, Math.max(0, -rect.top));
-      const progress = progressedY / totalScrollableY;
+      const progress = Math.min(1, Math.max(0, progressedY / totalScrollableY));
       const maxScrollLeft = Math.max(0, container.scrollWidth - container.clientWidth);
-      container.scrollLeft = maxScrollLeft * progress;
+      
+      // Use smooth easing for better animation
+      const easedProgress = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+      container.scrollLeft = maxScrollLeft * easedProgress;
 
       // Update pagination index based on mapped scrollLeft
       const step = stepDistance || (cardWidth + gapPx);
@@ -171,7 +178,7 @@ const OurServices = ({ showHeader = true, items }) => {
       {/* Services Cards with scroll-controlled horizontal movement */}
       <div className="relative" ref={sectionRef} style={{ height: sectionHeightPx ? `${sectionHeightPx}px` : '200vh' }}>
         {/* Sticky viewport locks to top and fills viewport to freeze vertical motion */}
-        <div className="sticky top-0 h-screen flex items-center justify-center" ref={stickyRef}>
+        <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden will-change-transform" ref={stickyRef}>
           <div className="w-full">
             <div 
               ref={scrollContainerRef}

@@ -1,66 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import OurServices from '../components/OurServices';
-import StickySteps from '../components/StickySteps';
-
-const HowItWorksWithStickyHeading = () => {
-  const [isHeadingSticky, setIsHeadingSticky] = useState(true);
-  const [releaseHeading, setReleaseHeading] = useState(false);
-
-  const handleActiveChange = (index, total) => {
-    // Keep sticky even when last step becomes active; release handled by progress
-    setReleaseHeading(false);
-    setIsHeadingSticky(true);
-  };
-
-  const handleProgress = (progress, index, total) => {
-    // When last step is active and we're in the final ~7% of scroll, release heading
-    if (index >= total - 1 && progress > 0.93) {
-      if (!releaseHeading) setReleaseHeading(true);
-    } else if (releaseHeading) {
-      setReleaseHeading(false);
-    }
-  };
-
-  return (
-    <>
-      <div className={`text-center ${isHeadingSticky && !releaseHeading ? 'sticky top-14 md:top-16 lg:top-20 z-40 bg-[#EFE7D5] bg-opacity-90' : ''}`}>
-        <div className="text-[#E2552A] text-sm md:text-base font-semibold tracking-wide mb-2">Our Process</div>
-        <h3 className="font-serif text-[#0D1B2A] font-bold text-[32px] md:text-[44px] lg:text-[52px] leading-tight">How It Works</h3>
-      </div>
-
-      <StickySteps
-        onActiveChange={handleActiveChange}
-        onProgress={handleProgress}
-        steps={[
-          {
-            title: 'Connect',
-            description:
-              'Launch & Execution involves implementing your digital marketing strategy with precision. We coordinate all elements to ensure a seamless rollout, optimizing campaigns for maximum impact and engagement.',
-            image: '/images/partner_us/connect.png',
-          },
-          {
-            title: 'Collaborate',
-            description:
-              'Launch & Execution involves implementing your digital marketing strategy with precision. We coordinate all elements to ensure a seamless rollout, optimizing campaigns for maximum impact and engagement.',
-            image: '/images/partner_us/collaborate.png',
-          },
-          {
-            title: 'Deliver',
-            description:
-              'Launch & Execution involves implementing your digital marketing strategy with precision. We coordinate all elements to ensure a seamless rollout, optimizing campaigns for maximum impact and engagement.',
-            image: '/images/partner_us/deliver.png',
-          },
-          {
-            title: 'Grow Together',
-            description:
-              'Launch & Execution involves implementing your digital marketing strategy with precision. We coordinate all elements to ensure a seamless rollout, optimizing campaigns for maximum impact and engagement.',
-            image: '/images/partner_us/grow together.png',
-          },
-        ]}
-      />
-    </>
-  );
-};
+import PartnerProcess from '../components/PartnerProcess';
+ 
 
 const PartnerWithUs = () => {
   return (
@@ -157,11 +98,8 @@ const PartnerWithUs = () => {
         />
       </section>
 
-      {/* Our Process - How It Works */}
-      <section className="max-w-[1200px] mx-auto px-4 md:px-8 pt-4 md:pt-6 lg:pt-8 pb-16">
-        {/* Sticky heading until last step, then it scrolls away */}
-        <HowItWorksWithStickyHeading />
-      </section>
+      {/* Our Process - How It Works (Partner-specific static cards) */}
+      <PartnerProcess />
 
       {/* Services We White Label - Heading Section */}
       <section className="max-w-[1100px] mx-auto px-4 md:px-8 pt-6 md:pt-8 lg:pt-10 pb-4 text-center">
