@@ -1,4 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 const photos = [
   '/images/image 12.png',
@@ -7,64 +12,107 @@ const photos = [
 ];
 
 const OurStory = () => {
-  const scrollContainerRef = useRef(null);
-  const firstCardRef = useRef(null);
-  const secondCardRef = useRef(null);
-  const [cardWidth, setCardWidth] = useState(400);
-  const [gapPx, setGapPx] = useState(20);
-  const [stepDistance, setStepDistance] = useState(420);
+  const wrapperRef = useRef(null);
+  const cardsRef = useRef([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // GSAP Horizontal Scroll Animation for Milestones
   useEffect(() => {
-    const measure = () => {
-      if (firstCardRef.current) {
-        setCardWidth(firstCardRef.current.offsetWidth);
-      }
-      if (firstCardRef.current && secondCardRef.current) {
-        const step = Math.abs(secondCardRef.current.offsetLeft - firstCardRef.current.offsetLeft);
-        if (step > 0) setStepDistance(step);
-      } else {
-        setStepDistance(cardWidth + gapPx);
-      }
+    const wrapper = wrapperRef.current;
+    const cards = cardsRef.current;
+    
+    if (!wrapper || !cards.length) return;
+
+    // Handle resize events
+    const handleResize = () => {
+      ScrollTrigger.refresh();
     };
-    measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
-  }, [cardWidth, gapPx]);
+    
+    window.addEventListener('resize', handleResize);
 
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    const onScroll = () => {
-      const step = stepDistance || (cardWidth + gapPx);
-      if (step <= 0) return;
-      const idx = Math.round(container.scrollLeft / step);
-      setCurrentIndex(idx);
+    // Calculate total width needed for horizontal scroll
+    const getMaxWidth = () => {
+      return cards.reduce((val, card) => val + card.offsetWidth, 0);
     };
-    container.addEventListener('scroll', onScroll, { passive: true });
-    return () => container.removeEventListener('scroll', onScroll);
-  }, [stepDistance, cardWidth, gapPx]);
 
-  const scrollToIndex = (index) => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    const step = stepDistance || (cardWidth + gapPx);
-    const maxScrollLeft = container.scrollWidth - container.clientWidth;
-    const targetLeft = Math.min(Math.max(0, index * step), Math.max(0, maxScrollLeft));
-    container.scrollTo({ left: targetLeft, behavior: 'smooth' });
-  };
+    const maxWidth = getMaxWidth();
+    const scrollSpeed = 1.2;
+    let tl = gsap.timeline();
 
-  const scrollLeft = () => {
-    scrollToIndex(Math.max(0, currentIndex - 1));
-  };
+    // Create horizontal scroll animation with maximum performance
+    // Ensure we scroll enough to show the last card completely
+    const isMobile = window.innerWidth < 768;
+    const extraSpace = isMobile ? 0.6 : 0.15; // Increased for complete 5th card visibility
+    const scrollDistance = maxWidth - window.innerWidth + (window.innerWidth * extraSpace);
+    tl.to(cards, {
+      x: -scrollDistance,
+      duration: 1,
+      ease: "none",
+      force3D: true,
+      transformOrigin: "center center",
+      immediateRender: false, // Better performance
+      willChange: "transform" // Optimize for GPU acceleration
+    });
 
-  const scrollRight = () => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    const step = stepDistance || (cardWidth + gapPx);
-    const maxIndex = Math.ceil((container.scrollWidth - container.clientWidth) / step);
-    scrollToIndex(Math.min(maxIndex, currentIndex + 1));
-  };
+    // Create ScrollTrigger with highly optimized settings
+    const scrollTrigger = ScrollTrigger.create({
+      animation: tl,
+      trigger: wrapper,
+      pin: true,
+      scrub: 0.05, // Reduced scrub for smoother animation
+      snap: {
+        snapTo: "labels",
+        duration: { min: 0.2, max: 0.5 },
+        delay: 0.1,
+        directional: false
+      },
+      end: () => "+=" + (scrollDistance / scrollSpeed) * 2, // Extended duration to show all cards
+      invalidateOnRefresh: true,
+      anticipatePin: 1,
+      refreshPriority: -1, // Better performance
+      fastScrollEnd: true, // Optimize for fast scrolling
+      onUpdate: (self) => {
+        // Update current index based on progress
+        const progress = self.progress;
+        const newIndex = Math.round(progress * (cards.length - 1));
+        setCurrentIndex(newIndex);
+      }
+    });
+
+    function init() {
+      gsap.set(cards, { 
+        x: 0, 
+        force3D: true,
+        immediateRender: false
+      });
+      const maxWidth = getMaxWidth();
+      const isMobile = window.innerWidth < 768;
+      const extraSpace = isMobile ? 0.6 : 0.15; // Increased for complete 5th card visibility
+      const scrollDistance = maxWidth - window.innerWidth + (window.innerWidth * extraSpace);
+      let position = 0;
+      const distance = scrollDistance;
+      
+      // Add labels for each card with better spacing
+      tl.add("label0", 0);
+      cards.forEach((card, i) => {
+        let progress = position;
+        position += card.offsetWidth / distance;
+        tl.add("label" + (i + 1), position);
+      });
+    }
+
+    init();
+    ScrollTrigger.addEventListener("refreshInit", init);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      ScrollTrigger.removeEventListener("refreshInit", init);
+      scrollTrigger.kill();
+      tl.kill();
+    };
+  }, []);
+
 
   return (
     <main className="bg-[#EFE7D5] min-h-screen">
@@ -345,10 +393,10 @@ const OurStory = () => {
       </section>
 
       {/* Milestones Section */}
-      <section className="bg-[#EFE7D5] py-20 px-4 md:px-8 overflow-x-hidden">
+      <section className="bg-[#EFE7D5] pt-8 sm:pt-14 md:pt-20 pb-0 px-2 sm:px-4 md:px-8 overflow-x-hidden">
         <div className="max-w-7xl mx-auto overflow-x-hidden">
           {/* Header Section */}
-          <div className="text-center mb-20">
+          <div className="text-center mb-8 sm:mb-12 md:mb-20">
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-[#0D1B2A] mb-4 tracking-tight">
               Milestones
             </h2>
@@ -358,92 +406,89 @@ const OurStory = () => {
           </div>
         </div>
         
-        {/* Milestones Cards with Pagination */}
-        <div className="relative">
-          {/* Navigation Arrows */}
-          <button 
-            onClick={scrollLeft}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-200 active:scale-95"
-            aria-label="Scroll left"
-          >
-            <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          
-          <button 
-            onClick={scrollRight}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-200 active:scale-95"
-            aria-label="Scroll right"
-          >
-            <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-          
-          {/* Cards Container with Horizontal Scrolling */}
-          <div 
-            ref={scrollContainerRef}
-            className="flex space-x-5 overflow-x-auto pb-4 px-4" 
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {[
-              {
-                id: "2023",
-                title: "The Beginning",
-                description: "Launched Apnaaapan with a vision to offer client-first creative solutions."
-              },
-              {
-                id: "2024",
-                title: "First 100 Clients",
-                description: "Successfully delivered 50+ branding and marketing projects across industries."
-              },
-              {
-                id: "2025",
-                title: "Major Brand Wins",
-                description: "Partnered with leading national clients & launched 360° campaigns."
-              },
-              {
-                id: "2026",
-                title: "Global Expansion",
-                description: "Expanded our services internationally and established partnerships worldwide."
-              },
-              {
-                id: "2027",
-                title: "Innovation Hub",
-                description: "Launched our innovation lab to develop cutting-edge marketing technologies."
-              }
-            ].map((milestone, index) => (
-              <div key={milestone.id} className="flex-shrink-0 w-[300px] sm:w-[340px] md:w-[400px]" ref={index === 0 ? firstCardRef : (index === 1 ? secondCardRef : null)}>
-                <div className="bg-white rounded-3xl p-6 md:p-8 shadow-lg border border-gray-300 group relative overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl h-[460px] md:h-[520px]">
-                  {/* Hover Background Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-orange-600 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out rounded-3xl"></div>
-                  
-                  {/* Arrow Icon */}
-                  <div className="absolute top-6 right-6 z-10">
-                    <svg className="w-6 h-6 text-[#1a2236] transform rotate-45 transition-all duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  </div>
-                  
-                  {/* Content Container */}
-                  <div className="relative z-10 flex flex-col h-full">
-                    <div className="flex-1">
-                      <span className="text-orange-500 font-bold text-lg mb-6 block tracking-wider group-hover:text-white transition-colors duration-300">
-                        ({milestone.id})
-                      </span>
-                      <h3 className="text-xl md:text-3xl font-serif font-bold text-[#1a2236] mb-4 md:mb-6 group-hover:text-white transition-colors duration-300 leading-tight">
-                        {milestone.title}
-                      </h3>
-                      <p className="text-[#22223b] leading-relaxed text-sm md:text-base group-hover:text-white transition-colors duration-300">
-                        {milestone.description}
-                      </p>
-                    </div>
+        {/* Milestones Cards with GSAP ScrollTrigger horizontal scroll */}
+        <div 
+          ref={wrapperRef}
+          className="wrapper flex flex-nowrap items-center"
+          style={{ 
+            height: window.innerWidth < 768 ? '80vh' : '90vh',
+            willChange: 'transform',
+            backfaceVisibility: 'hidden',
+            perspective: '1000px',
+            transform: 'translateZ(0)', // Force hardware acceleration
+            WebkitTransform: 'translateZ(0)',
+            WebkitBackfaceVisibility: 'hidden',
+            contain: 'layout style paint' // Optimize rendering performance
+          }}
+        >
+          {[
+            {
+              id: "2023",
+              title: "The Beginning",
+              description: "Launched Apnaaapan with a vision to offer client-first creative solutions."
+            },
+            {
+              id: "2024",
+              title: "First 100 Clients",
+              description: "Successfully delivered 50+ branding and marketing projects across industries."
+            },
+            {
+              id: "2025",
+              title: "Major Brand Wins",
+              description: "Partnered with leading national clients & launched 360° campaigns."
+            },
+            {
+              id: "2026",
+              title: "Global Expansion",
+              description: "Expanded our services internationally and established partnerships worldwide."
+            },
+            {
+              id: "2027",
+              title: "Innovation Hub",
+              description: "Launched our innovation lab to develop cutting-edge marketing technologies."
+            }
+          ].map((milestone, index) => (
+            <div 
+              key={milestone.id} 
+              ref={el => cardsRef.current[index] = el}
+              className="flex-shrink-0 w-[240px] sm:w-[320px] md:w-[380px] lg:w-[450px] mx-1 sm:mx-4"
+              style={{
+                willChange: 'transform',
+                backfaceVisibility: 'hidden',
+                transform: 'translateZ(0)',
+                WebkitTransform: 'translateZ(0)',
+                WebkitBackfaceVisibility: 'hidden',
+                contain: 'layout style paint' // Optimize rendering performance
+              }}
+            >
+              <div className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 shadow-lg border border-gray-300 group relative overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl h-[420px] sm:h-[480px] md:h-[560px]">
+                {/* Hover Background Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-b from-orange-600 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out rounded-3xl"></div>
+                
+                {/* Arrow Icon */}
+                <div className="absolute top-6 right-6 z-10">
+                  <svg className="w-6 h-6 text-[#1a2236] transform rotate-45 transition-all duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </div>
+                
+                {/* Content Container */}
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="flex-1">
+                    <span className="text-orange-500 font-bold text-lg mb-6 block tracking-wider group-hover:text-white transition-colors duration-300">
+                      ({milestone.id})
+                    </span>
+                    <h3 className="text-xl md:text-3xl font-serif font-bold text-[#1a2236] mb-4 md:mb-6 group-hover:text-white transition-colors duration-300 leading-tight">
+                      {milestone.title}
+                    </h3>
+                    <p className="text-[#22223b] leading-relaxed text-sm md:text-base group-hover:text-white transition-colors duration-300">
+                      {milestone.description}
+                    </p>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
       

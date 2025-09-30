@@ -36,6 +36,24 @@ const Footer = () => {
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 transition-all duration-300 group-hover:w-full"></span>
                   </a>
                 </li>
+                <li>
+                  <a href="/work" className="text-white hover:text-orange-400 transition-colors duration-200 relative group">
+                    Work
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="/blog" className="text-white hover:text-orange-400 transition-colors duration-200 relative group">
+                    Blog
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="/services" className="text-white hover:text-orange-400 transition-colors duration-200 relative group">
+                    Services
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+                  </a>
+                </li>
               </ul>
             </div>
 

@@ -5,7 +5,7 @@ const WorkWithUs = () => {
     <div className="bg-[#EFE7D5] px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="text-center min-h-screen flex flex-col justify-center items-center py-6">
+        <div className="text-center min-h-[90vh] flex flex-col justify-center items-center py-6">
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-[#0D1B2A] mb-6 leading-tight" style={{ fontFamily: 'MADE Avenue PERSONAL USE' }}>
             Shape Your Growth With <span className="text-[#FFC107]">Us</span>
           </h1>
@@ -30,7 +30,7 @@ const WorkWithUs = () => {
         </div>
 
         {/* Quote/Testimonial Section */}
-        <div className="text-center mb-32">
+        <div className="text-center mb-20 sm:mb-24 md:mb-28">
           <blockquote className="max-w-5xl mx-auto">
             <p className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0D1B2A] leading-relaxed mb-6">
               "Figma ipsum component variant main layer. Scrolling object vector comment export group arrow. Layer hand align slice layout scrolling layout effect. Slice mask invite union asset project device ellipse. Star vector distribute bold text library fill effect create boolean. <span className="text-[#F26B2A]">- Pixel figma component duplicate polygon line main inspect</span>"
@@ -45,7 +45,7 @@ const WorkWithUs = () => {
         </div>
 
         {/* Our Culture Section */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
+        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20 sm:mb-24 md:mb-28">
           {/* Left Section - Text Content */}
           <div className="space-y-8">
             <h2 className="text-4xl md:text-5xl font-bold text-black leading-tight">
@@ -70,7 +70,7 @@ const WorkWithUs = () => {
         </div>
 
         {/* Numbers That Shows Growth Section */}
-        <div className="text-center mb-32 w-full">
+        <div className="text-center mb-20 sm:mb-24 md:mb-28 w-full">
           <h2 className="text-4xl md:text-5xl font-bold text-black mb-16 leading-tight font-serif">
             Numbers That Shows Growth
           </h2>
@@ -119,7 +119,7 @@ const WorkWithUs = () => {
         </div>
 
         {/* Life at Apnaaapan Section */}
-        <div className="mb-32 w-full">
+        <div className="mb-20 sm:mb-24 md:mb-28 w-full">
           <h2 className="text-4xl md:text-5xl font-bold text-black mb-16 leading-tight font-serif text-center">
             Life at Apnaaapan
           </h2>

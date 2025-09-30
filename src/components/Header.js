@@ -92,43 +92,18 @@ const Header = () => {
             </a>
           </div>
 
-          {/* Work group */}
-          <div 
-            className="relative"
-            onMouseEnter={() => handleGroupEnter('work')}
-            onMouseLeave={handleGroupLeave}
+          {/* Work (simple link, submenu removed) */}
+          <a 
+            href="/work" 
+            className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
+              currentPath === '/work' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
+            }`}
           >
-            <a 
-              href="/work" 
-              className={`font-dm-sans-medium text-sm transition-colors duration-200 relative ${
-                currentPath === '/work' ? 'text-[#0D1B2A]' : 'text-[#5B5B5B]'
-              }`}
-            >
-              <span className="inline-flex items-center gap-1">
-                <span>Work</span>
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 20 20" 
-                  fill="currentColor" 
-                  className={`w-4 h-4 transition-transform duration-200 ${openMenu === 'work' ? 'rotate-180' : 'rotate-0'}`}
-                  aria-hidden="true"
-                >
-                  <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" />
-                </svg>
-              </span>
-              {currentPath === '/work' && (
-                <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
-              )}
-            </a>
-            {openMenu === 'work' && (
-              <div className="absolute left-0 top-full mt-2">
-                <div className="rounded-xl bg-white shadow-lg ring-1 ring-black/5 py-2 min-w-[160px]">
-                  <a href="/blog" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">Blog</a>
-                  <a href="/services" className="block px-4 py-2 text-sm text-[#3B3B3B] hover:bg-gray-50">Services</a>
-                </div>
-              </div>
+            Work
+            {currentPath === '/work' && (
+              <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full"></div>
             )}
-          </div>
+          </a>
 
           <a 
             href="/contact" 
@@ -199,24 +174,8 @@ const Header = () => {
           {/* Our Story (simple link) */}
           <a href="/our-story" className="block py-3 text-[#3B3B3B] font-dm-sans-medium">Our Story</a>
 
-          {/* Work group (accordion) */}
-          <button
-            className="w-full flex items-center justify-between py-3 text-[#3B3B3B] font-dm-sans-medium"
-            onClick={() => setMobileSubmenuOpen((k) => (k === 'work' ? null : 'work'))}
-          >
-            <span className="inline-flex items-center gap-2">
-              <span>Work</span>
-            </span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className={`w-5 h-5 transition-transform ${mobileSubmenuOpen === 'work' ? 'rotate-180' : ''}`}> 
-              <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" />
-            </svg>
-          </button>
-          {mobileSubmenuOpen === 'work' && (
-            <div className="pl-4 pb-2 space-y-1">
-              <a href="/blog" className="block py-2 text-sm text-[#3B3B3B]">Blog</a>
-              <a href="/services" className="block py-2 text-sm text-[#3B3B3B]">Services</a>
-            </div>
-          )}
+          {/* Work (simple link on mobile, submenu removed) */}
+          <a href="/work" className="block py-3 text-[#3B3B3B] font-dm-sans-medium">Work</a>
 
           <a href="/contact" className="block py-3 text-[#3B3B3B] font-dm-sans-medium">Contact Us</a>
           <a href="/with-apnaaapan" className="block py-3 text-[#3B3B3B] font-dm-sans-medium">With.Apnaaapan</a>

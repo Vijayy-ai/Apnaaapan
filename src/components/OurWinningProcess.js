@@ -95,9 +95,9 @@ const OurWinningProcess = ({ compact = false, showSpacer = true, spacerScreens =
 
   return (
     <>
-      <section ref={sectionRef} className={`bg-[#EFE7D5] ${compact ? 'py-8 px-6' : 'py-16 px-4 md:px-8'} relative`}>
+      <section ref={sectionRef} className={`bg-[#EFE7D5] ${compact ? 'py-6 px-6' : 'py-8 px-4 md:px-8'} relative`}>
         <div className="max-w-7xl mx-auto relative">
-          <div className={`text-center ${compact ? 'mb-6' : 'mb-10 md:mb-12'} ${isSmallScreen ? '' : 'sticky'} ${compact ? 'top-4' : 'top-8'} z-50 bg-[#EFE7D5] ${compact ? 'py-2' : 'py-4'}`}>
+          <div className={`text-center ${compact ? 'mb-4' : 'mb-6 md:mb-8'} ${isSmallScreen ? '' : 'sticky'} ${compact ? 'top-4' : 'top-8'} z-50 bg-[#EFE7D5] ${compact ? 'py-2' : 'py-4'}`}>
             <h2 className="text-3xl md:text-5xl font-serif text-gray-800">Our Winning Process</h2>
           </div>
           <div className={`relative ${compact ? 'h-[80vh]' : (isSmallScreen ? 'h-[200vh]' : 'h-[80vh]')}`}>
@@ -134,7 +134,7 @@ const OurWinningProcess = ({ compact = false, showSpacer = true, spacerScreens =
         </div>
       </section>
       {showSpacer && (
-        <div className="bg-[#EFE7D5]" style={{ height: isSmallScreen ? `${Math.max(1, spacerScreens) * 82}vh` : `${Math.max(1, spacerScreens) * 75}vh` }}></div>
+        <div className="bg-[#EFE7D5]" style={{ height: isSmallScreen ? `${Math.max(1, spacerScreens) * 72}vh` : `${Math.max(1, spacerScreens) * 68}vh` }}></div>
       )}
     </>
   );
