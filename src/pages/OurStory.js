@@ -361,30 +361,30 @@ const OurStory = () => {
         </div>
 
         {/* What sets us apart Card */}
-        <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
           <div className="flex flex-col lg:flex-row">
             {/* Left side - Color bars */}
-            <div className="lg:w-8 flex lg:flex-col">
+            <div className="lg:w-8 flex lg:flex-col h-3 sm:h-4 lg:h-auto">
               <div className="flex-1 lg:flex-none lg:h-24 bg-[#FF6B35]"></div>
               <div className="flex-1 lg:flex-none lg:h-24 bg-[#FFD700]"></div>
               <div className="flex-1 lg:flex-none lg:h-24 bg-[#4682B4]"></div>
             </div>
             
             {/* Right side - Content */}
-            <div className="flex-1 p-8 lg:p-12">
-              <div className="flex items-start justify-between mb-6">
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0D1B2A]" style={{ fontFamily: 'MADE Avenue PERSONAL USE' }}>
+            <div className="flex-1 p-4 sm:p-6 md:p-8 lg:p-12">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 sm:mb-6">
+                <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1B2A] mb-3 sm:mb-0 leading-tight" style={{ fontFamily: 'MADE Avenue PERSONAL USE' }}>
                   What sets us apart from others?
                 </h3>
-                <div className="flex space-x-1 ml-6">
+                <div className="flex space-x-1 sm:ml-6">
                   {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-6 h-6 text-[#FF6B35]" fill="currentColor" viewBox="0 0 20 20">
+                    <svg key={i} className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#FF6B35]" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   ))}
                 </div>
               </div>
-              <p className="text-lg md:text-xl leading-8 text-[#2C2C2C] max-w-5xl" style={{ fontFamily: 'NexaRegular' }}>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-6 sm:leading-7 md:leading-8 text-[#2C2C2C] max-w-5xl" style={{ fontFamily: 'NexaRegular' }}>
                 We genuinely care about your goals. Every team here, from design to marketing, works with one focus: making sure you win. We don't believe in one-size-fits-all solutions. Instead, we listen, we understand, and we build what actually works for you. It's not just about delivering work—it's about delivering impact.
               </p>
             </div>

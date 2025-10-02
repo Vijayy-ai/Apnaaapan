@@ -82,7 +82,7 @@ function App() {
   return (
     <div className="min-h-screen bg-[#EFE7D5]">
       <Header />
-      <div className="pt-16 md:pt-20">
+      <div className="pt-14 sm:pt-16 md:pt-20">
         {renderPage()}
         <Footer />
       </div>
