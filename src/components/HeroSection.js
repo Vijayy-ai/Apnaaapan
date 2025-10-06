@@ -2,11 +2,11 @@ import React from 'react';
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#EFE7D5] via-[#F5F0E8] to-[#E8DCC6] px-3 sm:px-4 md:px-8 py-8 sm:py-12 md:py-16">
+    <section className="relative min-h-[80vh] flex items-center justify-center bg-[#EFE7D5] px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-10">
       {/* Main Content Container - Adjusted size to match design */}
       <div className="relative z-10 max-w-6xl mx-auto w-full">
         {/* Hero Card - Properly sized as in design image */}
-        <div className="relative bg-[#faf8f3] rounded-xl sm:rounded-2xl md:rounded-3xl p-6 sm:p-10 md:p-20 lg:p-24 shadow-2xl overflow-hidden min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center">
+        <div className="relative bg-[#faf8f3] rounded-xl sm:rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 lg:p-16 shadow-2xl overflow-hidden min-h-[40vh] sm:min-h-[45vh] md:min-h-[50vh] flex items-center justify-center">
           
           {/* Background Gradient Shapes - EXACTLY as in design image */}
           
@@ -22,21 +22,21 @@ const HeroSection = () => {
           {/* Content Container - Centered */}
           <div className="relative z-10 text-center max-w-4xl mx-auto">
             {/* Main Headline - EXACTLY as in design image */}
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif leading-tight mb-4 sm:mb-6">
-              <span className="text-gray-800 block mb-2 sm:mb-3 font-medium">We first puts your goals</span>
-              <span className="bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent font-bold block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif leading-tight mb-6 sm:mb-8">
+              <span className="text-gray-800 block mb-3 sm:mb-4 font-medium">We first puts your goals</span>
+              <span className="bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent font-bold block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
                 to derive results
               </span>
             </h1>
             
             {/* Descriptive Text - EXACTLY as in design image */}
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mb-6 sm:mb-8 md:mb-10 leading-relaxed font-sans max-w-4xl mx-auto px-2">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 mb-8 sm:mb-10 md:mb-12 leading-relaxed font-sans max-w-4xl mx-auto px-4">
               At Apnaaapan, we handle it all—design, content, marketing, socials—to make your brand shine.
             </p>
             
             {/* CTA Button - EXACTLY as in design image */}
-            <button className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 rounded-full font-semibold text-sm sm:text-base md:text-lg lg:text-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center space-x-2 sm:space-x-3 mx-auto shadow-lg">
-              <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 20 20">
+            <button className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white px-8 sm:px-10 md:px-12 lg:px-14 py-4 sm:py-5 md:py-6 rounded-full font-semibold text-base sm:text-lg md:text-xl lg:text-2xl hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center space-x-3 sm:space-x-4 mx-auto shadow-lg">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
               </svg>
               <span>Book a Free Strategy Call</span>

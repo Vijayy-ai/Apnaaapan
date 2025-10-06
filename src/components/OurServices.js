@@ -58,13 +58,13 @@ const OurServices = ({ showHeader = true, items }) => {
     };
 
     const maxWidth = getMaxWidth();
-    const scrollSpeed = 1.2; // Further reduced for smoother animation
+    const scrollSpeed = window.innerWidth < 768 ? 1.5 : 1.2; // Faster scroll for mobile to reduce empty space
     let tl = gsap.timeline();
 
     // Create horizontal scroll animation with maximum performance
     // Ensure we scroll enough to show the last card completely
     const isMobile = window.innerWidth < 768;
-    const extraSpace = isMobile ? 0.6 : 0.15; // Increased for complete 5th card visibility
+    const extraSpace = isMobile ? 0.05 : 0.15; // Minimized for mobile to eliminate empty space during animation
     const scrollDistance = maxWidth - window.innerWidth + (window.innerWidth * extraSpace);
     tl.to(cards, {
       x: -scrollDistance,
@@ -88,7 +88,7 @@ const OurServices = ({ showHeader = true, items }) => {
         delay: 0.1,
         directional: false
       },
-      end: () => "+=" + (scrollDistance / scrollSpeed) * 2, // Extended duration to show all cards
+      end: () => "+=" + (scrollDistance / scrollSpeed) * (window.innerWidth < 768 ? 1.0 : 2), // Further reduced for mobile to show next section sooner
       invalidateOnRefresh: true,
       anticipatePin: 1,
       refreshPriority: -1, // Better performance
@@ -109,7 +109,7 @@ const OurServices = ({ showHeader = true, items }) => {
       });
       const maxWidth = getMaxWidth();
       const isMobile = window.innerWidth < 768;
-      const extraSpace = isMobile ? 0.6 : 0.15; // Increased for complete 5th card visibility
+      const extraSpace = isMobile ? 0.05 : 0.15; // Minimized for mobile to eliminate empty space during animation
       const scrollDistance = maxWidth - window.innerWidth + (window.innerWidth * extraSpace);
       let position = 0;
       const distance = scrollDistance;
@@ -137,11 +137,11 @@ const OurServices = ({ showHeader = true, items }) => {
 
 
   return (
-    <section className="bg-[#EFE7D5] pt-6 sm:pt-8 md:pt-14 lg:pt-20 pb-4 sm:pb-6 md:pb-8 lg:pb-0 px-3 sm:px-4 md:px-8 overflow-x-hidden">
+    <section className="bg-[#EFE7D5] pt-4 sm:pt-8 md:pt-14 lg:pt-20 pb-0 sm:pb-6 md:pb-8 lg:pb-0 px-3 sm:px-4 md:px-8 overflow-x-hidden -mb-[15vh] sm:mb-0">
       <div className="max-w-7xl mx-auto overflow-x-hidden">
         {/* Header Section */}
         {showHeader && (
-          <div className="flex flex-col lg:flex-row items-center justify-between mb-4 sm:mb-6 md:mb-8 lg:mb-12 xl:mb-20">
+          <div className="flex flex-col lg:flex-row items-center justify-between mb-3 sm:mb-6 md:mb-8 lg:mb-12 xl:mb-20">
             <div className="lg:w-1/2 mb-3 sm:mb-4 md:mb-6 lg:mb-0 text-center lg:text-left">
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold text-[#1a2236] mb-2 sm:mb-3 md:mb-4 tracking-tight">
                 Our Services
@@ -175,7 +175,7 @@ const OurServices = ({ showHeader = true, items }) => {
         ref={wrapperRef}
         className="wrapper flex flex-nowrap items-center"
         style={{ 
-          height: window.innerWidth < 768 ? '60vh' : '90vh',
+          height: window.innerWidth < 768 ? '35vh' : '90vh',
           willChange: 'transform',
           backfaceVisibility: 'hidden',
           perspective: '1000px',
