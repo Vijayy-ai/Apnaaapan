@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +12,29 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
   const [errorMessage, setErrorMessage] = useState('');
+  const [countdown, setCountdown] = useState(0);
+
+  // Auto-dismiss success message after 5 seconds with countdown
+  useEffect(() => {
+    if (submitStatus === 'success') {
+      setCountdown(5);
+      
+      const countdownInterval = setInterval(() => {
+        setCountdown(prev => {
+          if (prev <= 1) {
+            clearInterval(countdownInterval);
+            setSubmitStatus(null);
+            setErrorMessage('');
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+      // Cleanup interval on component unmount or when status changes
+      return () => clearInterval(countdownInterval);
+    }
+  }, [submitStatus]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,7 +56,7 @@ const Contact = () => {
     setErrorMessage('');
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('http://localhost:5000/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -263,13 +286,36 @@ const Contact = () => {
               {/* Success/Error Messages */}
               {submitStatus === 'success' && (
                 <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl">
-                  <div className="flex items-center">
-                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span style={{ fontFamily: 'nexaRegular' }}>
-                      Thank you! Your message has been sent successfully. We'll get back to you soon.
-                    </span>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span style={{ fontFamily: 'nexaRegular' }}>
+                        Thank you! Your message has been sent successfully. We'll get back to you soon.
+                      </span>
+                    </div>
+                    <div className="flex items-center text-sm space-x-2">
+                      <span style={{ fontFamily: 'nexaRegular' }} className="mr-1">
+                        Auto-dismiss in:
+                      </span>
+                      <span className="bg-green-200 text-green-800 px-2 py-1 rounded-full font-semibold">
+                        {countdown}s
+                      </span>
+                      <button
+                        onClick={() => {
+                          setSubmitStatus(null);
+                          setErrorMessage('');
+                          setCountdown(0);
+                        }}
+                        className="text-green-600 hover:text-green-800 transition-colors"
+                        title="Dismiss message"
+                      >
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
